@@ -1,11 +1,11 @@
 import PageLayout from "components/PageLayout";
 
-const HomePage = () => {
+const Home = () => {
   return (
-    <PageLayout>
+    <PageLayout title="Home">
       <h1>Welcome to the Home page!</h1>
     </PageLayout>
   );
 };
 
-export default HomePage;
+export default Home;

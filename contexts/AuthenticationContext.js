@@ -38,30 +38,8 @@ function AuthenticationProvider({ children }) {
     },
   });
 
-  const logout = async () => {
-    try {
-      await axios.post("/api/auth/logout");
-      setToken(null);
-      if (privatePaths.includes(path)) {
-        router.push("/");
-      }
-    } catch (error) {
-      toast.error(
-        <div className="text-center">
-          <p>{error.response.data.message}</p>
-          <button
-            className="btn btn-primary"
-            onClick={path === "/" ? () => setToken(null) : router.reload}
-          >
-            Reload
-          </button>
-        </div>
-      );
-    }
-  };
-
   return (
-    <AuthenticationContext.Provider value={{ token, setToken, logout }}>
+    <AuthenticationContext.Provider value={{ token, setToken }}>
       {children}
     </AuthenticationContext.Provider>
   );

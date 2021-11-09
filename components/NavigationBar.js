@@ -3,12 +3,10 @@ import { Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import Link from "next/link";
 
-import { useAuthentication } from "contexts/AuthenticationContext";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 
 const NavigationBar = () => {
   const { user } = useAuthenticatedClient();
-  const { logout } = useAuthentication();
 
   return (
     <Navbar bg="light" expand="lg">
