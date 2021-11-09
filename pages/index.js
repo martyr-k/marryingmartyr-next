@@ -1,6 +1,5 @@
 import PageLayout from "components/PageLayout";
 import Image from "next/dist/client/image";
-import { Container } from "react-bootstrap";
 
 import styles from "../styles/Home.module.css";
 
@@ -14,6 +13,21 @@ const Home = () => {
             layout="fill"
             alt="home image 1"
             objectFit="cover"
+            priority
+          />
+          <Image
+            src="/imgs/home-image-2.jpg"
+            layout="fill"
+            alt="home image 2"
+            objectFit="cover"
+            priority
+          />
+          <Image
+            src="/imgs/home-image-1.jpg"
+            layout="fill"
+            alt="home image 2"
+            objectFit="cover"
+            objectPosition="center 35%"
             priority
           />
         </div>
