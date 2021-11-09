@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap";
 import NavigationBar from "./NavigationBar";
 import Head from "next/head";
 
@@ -9,7 +8,7 @@ const PageLayout = ({ children, title }) => {
         <title>#marryingmartyr | {title}</title>
       </Head>
       <NavigationBar />
-      <Container fluid>{children}</Container>
+      {children}
     </>
   );
 };
