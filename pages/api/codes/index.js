@@ -7,7 +7,7 @@ const handler = nc();
 
 handler.use(dbConnect, secured).get(async (req, res) => {
   try {
-    res.status(200).json({ status: "success", user: req.user });
+    res.status(200).json({ status: "success", code: req.code });
   } catch (error) {
     res.status(400).json({
       status: "failure",
