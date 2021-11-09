@@ -1,0 +1,9 @@
+.footer {
+  padding: 1rem 0;
+  background-color: black;
+  color: rgb(201, 175, 98);
+  font-family: "Playfair Display", serif;
+}
+.hcaptchaText a {
+  color: #fcf6f2;
+}
