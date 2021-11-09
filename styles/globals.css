@@ -1,4 +1,14 @@
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 a {
   cursor: pointer;
   text-decoration: none;
+}
+.bg-dark {
+  background-color: black;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
