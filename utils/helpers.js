@@ -44,5 +44,6 @@ export const sendToken = async (statusCode, code, req, res) => {
       value: generateToken(code._id),
       expiry: Date.now() + process.env.JWT_EXPIRES_IN * 60 * 1000,
     },
+    code,
   });
 };

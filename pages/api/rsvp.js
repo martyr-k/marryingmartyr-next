@@ -2,7 +2,7 @@
 
 // const handler = nc();
 
-// handler.post(async (req, res) => {
+// handler.use(dbConnect, secured).post(async (req, res) => {
 //   try {
 //     const { inviteCode } = req.body;
 

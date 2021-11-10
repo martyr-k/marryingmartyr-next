@@ -31,7 +31,7 @@ const NavigationBar = () => {
               <Nav.Link className={styles.navLink}>Home</Nav.Link>
             </Link>
             {code ? (
-              <Link href="/edit-rsvp" passHref>
+              <Link href="/rsvp/edit" passHref>
                 <Nav.Link className={styles.navLink}>Edit RSVP</Nav.Link>
               </Link>
             ) : (
