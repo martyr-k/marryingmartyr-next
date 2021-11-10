@@ -33,6 +33,31 @@ const RSVP = () => {
         toast.success("Success!");
         setToken(data.token);
       } else {
+        toast.success("Code Accepted!");
+        setGuest(data.guest);
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      }
+      console.log(error);
+    }
+  };
+
+  const handleRSVPSubmit = async (event) => {
+    try {
+      event.preventDefault();
+
+      const { data } = await axios.post("/api/rsvp", {
+        id: guest.id,
+      });
+
+      // virtual guests & rsvp'ed in-person
+      if (!data.guest) {
+        toast.success("Success!");
+        setToken(data.token);
+      } else {
+        toast.success("Code Accepted!");
         setGuest(data.guest);
       }
     } catch (error) {
@@ -61,13 +86,83 @@ const RSVP = () => {
         </h1>
 
         {guest ? (
-          <div>Hello</div>
+          <form className="mt-5 w-75 mx-auto">
+            <div className="row">
+              <div className="col-md-6">
+                <h2 className="lead mb-3 text-center text-md-start display-4">
+                  Please confirm who will be attending:
+                </h2>
+                <div>
+                  {guest.invitedGuests.map((guest, index) => {
+                    return (
+                      <div className="input-group mb-2" key={index}>
+                        <div className="input-group-text">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name={guest}
+                            value="true"
+                            aria-label="Checkbox for confirming guest attendance"
+                          />
+                        </div>
+                        <input
+                          className="form-control"
+                          disabled
+                          value={guest}
+                          aria-label="Text input with checkbox"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="col-md-6 d-flex flex-column justify-content-center">
+                <p className="lead mb-2 text-center">
+                  What song would make you dance?
+                </p>
+                <div className="row g-1 mb-2">
+                  <label className="col-lg-2" htmlFor="song">
+                    Song:
+                  </label>
+                  <div className="col-lg-10">
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="song"
+                      id="song"
+                    />
+                  </div>
+                </div>
+                <div className="row g-1 mb-2">
+                  <label className="col-lg-2" htmlFor="artist">
+                    Artist:
+                  </label>
+                  <div className="col-lg-10">
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="artist"
+                      id="artist"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Button
+              className="mx-auto d-block mt-3"
+              variant="secondary"
+              type="submit"
+              size="lg"
+            >
+              Submit
+            </Button>
+          </form>
         ) : (
           <Form
             className="mt-5 text-center w-75 mx-auto"
             onSubmit={handleLoginSubmit}
           >
-            <Form.Group as={Row} className="mb-3" controlId="invite-code">
+            <Form.Group as={Row} className="mb-2" controlId="invite-code">
               <Form.Label className="text-end" column md={4}>
                 Invite Code:
               </Form.Label>
@@ -79,7 +174,12 @@ const RSVP = () => {
                 />
               </Col>
             </Form.Group>
-            <Button variant="secondary" type="submit">
+            <Button
+              className="mt-3"
+              variant="secondary"
+              type="submit"
+              size="lg"
+            >
               Submit
             </Button>
           </Form>

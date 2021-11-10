@@ -22,7 +22,6 @@ function AuthenticationProvider({ children }) {
     refreshInterval: 15 * 60 * 1000,
     refreshWhenHidden: true,
     revalidateIfStale: false,
-    revalidateOnFocus: false,
     revalidateOnReconnect: false,
     revalidateOnMount: true,
     shouldRetryOnError: false,

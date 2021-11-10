@@ -65,7 +65,7 @@ const Home = () => {
         <div className={styles.date}>
           <h2 className="display-2">October 3, 2021</h2>
           <h2 className="display-2">1:30 PM</h2>
-          {remaining && <div className=" display-4">{remaining}</div>}
+          {remaining && <div className="display-4">{remaining}</div>}
         </div>
         <div className={styles.name}>
           <h2 className="display-1">Kelub &</h2>
