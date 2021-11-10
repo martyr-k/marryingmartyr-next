@@ -8,24 +8,47 @@ const handler = nc();
 
 handler.use(dbConnect).post(async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { inviteCode } = req.body;
 
-    if (!email || !password) {
-      throw new Error("Please provide an email address and/or password.");
+    if (!inviteCode) {
+      throw new Error("Please enter a code prior to clicking submit.");
     }
 
     const code = await Code.findOne({
-      email,
-    }).select("+password");
+      identifier: `${inviteCode}KV`,
+    }).select("+inviteCode");
 
     if (!code) {
-      throw new Error("Incorrect email or password, please try again.");
+      throw new Error(
+        "The code you have entered is invalid, please try again."
+      );
     }
 
-    if (code && (await code.comparePassword(password, code.password))) {
-      sendToken(200, code, req, res);
+    if (code && (await code.comparePassword(inviteCode, code.inviteCode))) {
+      if (code.attendance === "virtual") {
+        // - send rsvp confirmation email
+
+        code.rsvp = true;
+        await code.save();
+
+        sendToken(200, code, req, res);
+      } else {
+        const guest = {
+          id: code._id,
+          attendance: code.attendance,
+          invitedGuests: code.invitedGuests,
+          rsvp: code.rsvp,
+        };
+
+        res.status(200).json({
+          status: "success",
+          guest,
+        });
+      }
     } else {
-      throw new Error("Incorrect email or password, please try again.");
+      throw new Error(
+        "The code you have entered is invalid, please try again."
+      );
     }
   } catch (error) {
     res.status(400).json({
