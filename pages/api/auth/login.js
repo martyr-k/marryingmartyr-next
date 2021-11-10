@@ -32,6 +32,8 @@ handler.use(dbConnect).post(async (req, res) => {
         await code.save();
 
         sendToken(200, code, req, res);
+      } else if (code.attendance === "in-person" && code.rsvp) {
+        sendToken(200, code, req, res);
       } else {
         const guest = {
           id: code._id,

@@ -2,18 +2,17 @@ import axios from "axios";
 import Router from "next/router";
 import Image from "next/image";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { useAuthentication } from "contexts/AuthenticationContext";
-import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 import PageLayout from "components/PageLayout";
 import styles from "styles/RSVP.module.css";
 
 const RSVP = () => {
-  const { code } = useAuthenticatedClient();
   const inviteCodeRef = useRef();
   const { token, setToken } = useAuthentication();
+  const [guest, setGuest] = useState();
 
   useEffect(() => {
     if (token) {
@@ -29,14 +28,12 @@ const RSVP = () => {
         inviteCode: inviteCodeRef.current.value,
       });
 
-      // virtual guests
+      // virtual guests & rsvp'ed in-person
       if (!data.guest) {
-        toast.success("Code Accepted!");
-        setToken(response.data.token);
+        toast.success("Success!");
+        setToken(data.token);
       } else {
-        // in-person guests
-        if (data.guest.rsvp) {
-        }
+        setGuest(data.guest);
       }
     } catch (error) {
       if (error.response) {
@@ -63,26 +60,30 @@ const RSVP = () => {
           We can&apos;t wait for you to celebrate with us!
         </h1>
 
-        <Form
-          className="mt-5 text-center w-75 mx-auto"
-          onSubmit={handleLoginSubmit}
-        >
-          <Form.Group as={Row} className="mb-3" controlId="invite-code">
-            <Form.Label className="text-end" column md={4}>
-              Invite Code:
-            </Form.Label>
-            <Col md={4}>
-              <Form.Control
-                type="password"
-                placeholder="••••••••"
-                ref={inviteCodeRef}
-              />
-            </Col>
-          </Form.Group>
-          <Button variant="secondary" type="submit">
-            Submit
-          </Button>
-        </Form>
+        {guest ? (
+          <div>Hello</div>
+        ) : (
+          <Form
+            className="mt-5 text-center w-75 mx-auto"
+            onSubmit={handleLoginSubmit}
+          >
+            <Form.Group as={Row} className="mb-3" controlId="invite-code">
+              <Form.Label className="text-end" column md={4}>
+                Invite Code:
+              </Form.Label>
+              <Col md={4}>
+                <Form.Control
+                  type="password"
+                  placeholder="••••••••"
+                  ref={inviteCodeRef}
+                />
+              </Col>
+            </Form.Group>
+            <Button variant="secondary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        )}
       </div>
     </PageLayout>
   );

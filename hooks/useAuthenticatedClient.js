@@ -25,7 +25,7 @@ function useAuthenticatedClient(redirectTo, ...roles) {
   const { token } = useAuthentication();
   const { mutate } = useSWRConfig();
 
-  const { data, error } = useSWR(token && ["/api/users", token], fetcher, {
+  const { data, error } = useSWR(token && ["/api/codes", token], fetcher, {
     shouldRetryOnError: false,
     refreshWhenHidden: true,
     revalidateOnFocus: false,
@@ -43,7 +43,7 @@ function useAuthenticatedClient(redirectTo, ...roles) {
           errorCache.push({ key, time: Date.now() });
         }
       } else {
-        console.log("useAuthenticatedClient:", error);
+        console.log("useAuthenticatedClient:", error.response.data);
         toast.error(error.response.data);
       }
     },
@@ -68,7 +68,7 @@ function useAuthenticatedClient(redirectTo, ...roles) {
   }, [data, isLoading, redirectTo, router, token, roles]);
 
   return {
-    user: data?.user,
+    code: data?.code,
     isLoading,
   };
 }

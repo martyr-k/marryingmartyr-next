@@ -30,9 +30,15 @@ const NavigationBar = () => {
             <Link href="/" passHref>
               <Nav.Link className={styles.navLink}>Home</Nav.Link>
             </Link>
-            <Link href="/rsvp" passHref>
-              <Nav.Link className={styles.navLink}>RSVP</Nav.Link>
-            </Link>
+            {code ? (
+              <Link href="/edit-rsvp" passHref>
+                <Nav.Link className={styles.navLink}>Edit RSVP</Nav.Link>
+              </Link>
+            ) : (
+              <Link href="/rsvp" passHref>
+                <Nav.Link className={styles.navLink}>RSVP</Nav.Link>
+              </Link>
+            )}
             <Link href="/rsvp" passHref>
               <Nav.Link className={styles.navLink}>Our Story</Nav.Link>
             </Link>
@@ -50,7 +56,7 @@ const NavigationBar = () => {
             </Link>
             {["admin"].includes(code?.role) && (
               <Link href="/dashboard" passHref>
-                <Nav.Link>Dashboard</Nav.Link>
+                <Nav.Link className={styles.navLink}>Dashboard</Nav.Link>
               </Link>
             )}
           </Nav>
