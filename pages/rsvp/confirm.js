@@ -2,9 +2,10 @@ import axios from "axios";
 import Router from "next/router";
 import Image from "next/image";
 import { Button } from "react-bootstrap";
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
+import useInput from "hooks/useInput";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 import { useAuthentication } from "contexts/AuthenticationContext";
 import LoadingSpinner from "components/LoadingSpinner";
@@ -14,20 +15,12 @@ import styles from "styles/RSVP.module.css";
 const RSVP = () => {
   const { code, isLoading } = useAuthenticatedClient("/rsvp");
   const { token } = useAuthentication();
-  const inviteCodeRef = useRef();
-
-  //   useEffect(() => {
-  //     if (token) {
-  //       if (
-  //         code?.attendance === "virtual" ||
-  //         (code?.attendance === "in-person" && code?.rsvp)
-  //       ) {
-  //         Router.replace("/");
-  //       } else {
-  //         Router.replace("/rsvp/confirm");
-  //       }
-  //     }
-  //   }, [token, code]);
+  const [song, handleSongChange] = useInput("");
+  const [artist, handleArtistChange] = useInput("");
+  const [checkedState, setCheckedState] = useState(
+    new Array(code?.invitedGuests.length).fill(false)
+  );
+  const [confirmedGuests, setConfirmedGuests] = useState([]);
 
   const handleSubmit = async (event) => {
     try {
@@ -36,7 +29,9 @@ const RSVP = () => {
       await axios.post(
         "/api/rsvp",
         {
-          inviteCode: inviteCodeRef.current.value,
+          artist,
+          song,
+          confirmedGuests,
         },
         {
           headers: {
@@ -52,6 +47,24 @@ const RSVP = () => {
       }
       console.log(error);
     }
+  };
+
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+
+    const selectedGuests = updatedCheckedState
+      .map((val, index) => {
+        if (val) {
+          return code.invitedGuests[index];
+        }
+      })
+      .filter((guest) => guest);
+
+    setConfirmedGuests(selectedGuests);
   };
 
   return isLoading ? (
@@ -89,7 +102,9 @@ const RSVP = () => {
                           className="form-check-input"
                           type="checkbox"
                           name={guest}
-                          value="true"
+                          value={guest}
+                          checked={checkedState[index]}
+                          onChange={() => handleOnChange(index)}
                           aria-label="Checkbox for confirming guest attendance"
                         />
                       </div>
@@ -97,7 +112,7 @@ const RSVP = () => {
                         className="form-control"
                         disabled
                         value={guest}
-                        aria-label="Text input with checkbox"
+                        aria-label="Guest name"
                       />
                     </div>
                   );
@@ -114,8 +129,10 @@ const RSVP = () => {
                   <input
                     className="form-control"
                     type="text"
-                    name="song"
                     id="song"
+                    name="song"
+                    value={song}
+                    onChange={handleSongChange}
                   />
                 </div>
               </div>
@@ -127,8 +144,10 @@ const RSVP = () => {
                   <input
                     className="form-control"
                     type="text"
-                    name="artist"
                     id="artist"
+                    name="artist"
+                    value={artist}
+                    onChange={handleArtistChange}
                   />
                 </div>
               </div>
@@ -149,3 +168,5 @@ const RSVP = () => {
 };
 
 export default RSVP;
+
+// https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
