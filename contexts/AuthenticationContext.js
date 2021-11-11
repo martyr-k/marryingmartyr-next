@@ -15,7 +15,7 @@ const AuthenticationContext = createContext();
 function AuthenticationProvider({ children }) {
   const [token, setToken] = useState(null);
   const router = useRouter();
-  const privatePaths = ["/profile", "/events/new"];
+  const privatePaths = ["/rsvp/confirm"];
   const path = router.asPath.split("?")[0];
 
   useSWR("/api/auth/refresh-token", authFetcher, {
@@ -25,13 +25,14 @@ function AuthenticationProvider({ children }) {
     revalidateOnReconnect: false,
     revalidateOnMount: true,
     shouldRetryOnError: false,
+    revalidateOnFocus: false,
     onSuccess: (data) => {
       setToken(data.token);
     },
     onError: (error) => {
       if (privatePaths.includes(path)) {
         toast.error(error.response.data.message);
-        router.push("/auth/login");
+        router.push("/rsvp");
       }
       setToken(null);
     },

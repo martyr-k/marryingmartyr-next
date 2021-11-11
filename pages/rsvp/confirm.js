@@ -6,12 +6,14 @@ import { useRef, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
+import { useAuthentication } from "contexts/AuthenticationContext";
 import LoadingSpinner from "components/LoadingSpinner";
 import PageLayout from "components/PageLayout";
 import styles from "styles/RSVP.module.css";
 
 const RSVP = () => {
   const { code, isLoading } = useAuthenticatedClient("/rsvp");
+  const { token } = useAuthentication();
   const inviteCodeRef = useRef();
 
   //   useEffect(() => {
@@ -31,13 +33,19 @@ const RSVP = () => {
     try {
       event.preventDefault();
 
-      const { data } = await axios.post("/api/auth/login", {
-        inviteCode: inviteCodeRef.current.value,
-      });
+      await axios.post(
+        "/api/rsvp",
+        {
+          inviteCode: inviteCodeRef.current.value,
+        },
+        {
+          headers: {
+            authorization: token.value,
+          },
+        }
+      );
 
-      toast.success("Success!");
-      setCode(data.code);
-      setToken(data.token);
+      toast.success("RSVP Confirmed!");
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);
@@ -97,9 +105,7 @@ const RSVP = () => {
               </div>
             </div>
             <div className="col-md-6 d-flex flex-column justify-content-center">
-              <p className="lead mb-2 text-center">
-                What song would make you dance?
-              </p>
+              <p className="lead mb-3">What song would make you dance?</p>
               <div className="row g-1 mb-2">
                 <label className="col-lg-2" htmlFor="song">
                   Song:
