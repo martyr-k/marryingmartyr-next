@@ -11,7 +11,7 @@ const useInput = (initialValue) => {
     setValue("");
   };
 
-  return [value, handleChange, reset];
+  return { value, handleChange, setValue, reset };
 };
 
 export default useInput;

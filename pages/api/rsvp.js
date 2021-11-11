@@ -6,7 +6,7 @@ import { secured } from "lib/middleware";
 
 const handler = nc();
 
-handler.use(dbConnect, secured).post(async (req, res) => {
+handler.use(dbConnect, secured).patch(async (req, res) => {
   try {
     const { song, artist, confirmedGuests } = req.body;
     const code = await Code.findById(req.code._id);

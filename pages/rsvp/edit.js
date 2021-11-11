@@ -1,8 +1,7 @@
 import axios from "axios";
-import Router from "next/router";
 import Image from "next/image";
 import { Button } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 import rsvpImage from "public/imgs/rsvp.jpg";
@@ -13,15 +12,42 @@ import LoadingSpinner from "components/LoadingSpinner";
 import PageLayout from "components/PageLayout";
 import styles from "styles/RSVP.module.css";
 
-const RSVP = () => {
+const EditRSVP = () => {
   const { code, isLoading } = useAuthenticatedClient("/rsvp");
   const { token } = useAuthentication();
-  const [song, handleSongChange] = useInput("");
-  const [artist, handleArtistChange] = useInput("");
+  const {
+    value: song,
+    handleChange: handleSongChange,
+    setValue: setSongValue,
+  } = useInput(code?.song.split("- ")[1] || "");
+  const {
+    value: artist,
+    handleChange: handleArtistChange,
+    setValue: setArtistValue,
+  } = useInput(code?.song.split(" -")[0] || "");
   const [checkedState, setCheckedState] = useState(
     new Array(code?.invitedGuests.length).fill(false)
   );
   const [confirmedGuests, setConfirmedGuests] = useState([]);
+
+  useEffect(() => {
+    setSongValue(code?.song.split("- ")[1] || "");
+    setArtistValue(code?.song.split(" -")[0] || "");
+  }, [code?.song, setSongValue, setArtistValue, code]);
+
+  useEffect(() => {
+    if (code) {
+      const updatedCheckedState = code.invitedGuests.map((guest) => {
+        if (code.confirmedGuests.includes(guest)) {
+          return true;
+        }
+        return false;
+      });
+
+      setCheckedState(updatedCheckedState);
+      setConfirmedGuests(updateSelectedGuests(code, updatedCheckedState));
+    }
+  }, [code?.invitedGuests, code?.confirmedGuests, code]);
 
   const handleSubmit = async (event) => {
     try {
@@ -41,8 +67,7 @@ const RSVP = () => {
         }
       );
 
-      toast.success("RSVP Confirmed!");
-      Router.replace("/");
+      toast.success("RSVP Updated!");
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);
@@ -51,22 +76,23 @@ const RSVP = () => {
     }
   };
 
-  const handleOnChange = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    setCheckedState(updatedCheckedState);
-
-    const selectedGuests = updatedCheckedState
+  const updateSelectedGuests = (code, checkedState) => {
+    return checkedState
       .map((val, index) => {
         if (val) {
           return code.invitedGuests[index];
         }
       })
       .filter((guest) => guest);
+  };
 
-    setConfirmedGuests(selectedGuests);
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+    setConfirmedGuests(updateSelectedGuests(code, updatedCheckedState));
   };
 
   return isLoading ? (
@@ -166,6 +192,6 @@ const RSVP = () => {
   );
 };
 
-export default RSVP;
+export default EditRSVP;
 
 // https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
