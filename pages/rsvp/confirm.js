@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+import rsvpImage from "public/imgs/rsvp.jpg";
 import useInput from "hooks/useInput";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 import { useAuthentication } from "contexts/AuthenticationContext";
@@ -73,16 +74,13 @@ const RSVP = () => {
   ) : (
     <PageLayout>
       <div className={styles.main}>
-        <div className={styles.imageWrapper}>
-          <Image
-            src="/imgs/rsvp.jpg"
-            layout="fill"
-            alt="rsvp image"
-            objectFit="cover"
-            objectPosition="center 35%"
-            priority
-          />
-        </div>
+        <Image
+          src={rsvpImage}
+          alt="rsvp image"
+          objectFit="cover"
+          objectPosition="center 35%"
+          priority
+        />
 
         <h1 className="display-3 text-center pt-5">
           We can&apos;t wait for you to celebrate with us!

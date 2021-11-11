@@ -3,9 +3,9 @@
   position: relative;
   font-family: "Playfair Display SC", serif;
 }
-.imageWrapper {
-  position: absolute;
-  inset: 0;
-  opacity: 0.7;
+.main > span {
+  position: absolute !important;
+  opacity: 0.8 !important;
   z-index: -1;
+  height: 100% !important;
 }
