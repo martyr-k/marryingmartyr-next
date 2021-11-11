@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import PageLayout from "components/PageLayout";
 import Image from "next/dist/client/image";
 
+import homeImage1 from "public/imgs/home-image-3.jpg";
+import homeImage2 from "public/imgs/home-image-2.jpg";
+import homeImage3 from "public/imgs/home-image-1.jpg";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
@@ -38,30 +41,16 @@ const Home = () => {
   return (
     <PageLayout title="Home">
       <div className={styles.main}>
-        <div className={styles.imageWrapper}>
-          <Image
-            src="/imgs/home-image-3.jpg"
-            layout="fill"
-            alt="home image 1"
-            objectFit="cover"
-            priority
-          />
-          <Image
-            src="/imgs/home-image-2.jpg"
-            layout="fill"
-            alt="home image 2"
-            objectFit="cover"
-            priority
-          />
-          <Image
-            src="/imgs/home-image-1.jpg"
-            layout="fill"
-            alt="home image 2"
-            objectFit="cover"
-            objectPosition="center 35%"
-            priority
-          />
-        </div>
+        <Image src={homeImage1} alt="home image 1" objectFit="cover" priority />
+        <Image src={homeImage2} alt="home image 2" objectFit="cover" priority />
+        <Image
+          src={homeImage3}
+          alt="home image 2"
+          objectFit="cover"
+          objectPosition="center 35%"
+          priority
+        />
+
         <div className={styles.date}>
           <h2 className="display-2">October 3, 2021</h2>
           <h2 className="display-2">1:30 PM</h2>

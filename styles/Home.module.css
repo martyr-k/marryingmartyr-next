@@ -5,21 +5,19 @@
 .main {
   font-family: "Goudos";
   position: relative;
+  height: calc(100vh - 66px);
 }
 
-.imageWrapper {
-  position: relative;
-  height: calc(100vh - 66px);
-  opacity: 0.7;
-}
-.imageWrapper > span {
+.main > span {
+  inset: 0;
+  position: absolute !important;
   opacity: 0 !important;
   animation: animateBackground 27s infinite;
 }
-.imageWrapper > span:nth-of-type(2) {
+.main > span:nth-of-type(2) {
   animation-delay: 9s;
 }
-.imageWrapper > span:nth-of-type(3) {
+.main > span:nth-of-type(3) {
   animation-delay: 18s;
 }
 
@@ -61,11 +59,11 @@
     animation-timing-function: ease-in;
   }
   10% {
-    opacity: 1;
+    opacity: 0.7;
     animation-timing-function: ease-out;
   }
   20% {
-    opacity: 1;
+    opacity: 0.7;
   }
   40% {
     opacity: 0;
