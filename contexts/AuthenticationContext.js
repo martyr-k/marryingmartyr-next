@@ -15,7 +15,7 @@ const AuthenticationContext = createContext();
 function AuthenticationProvider({ children }) {
   const [token, setToken] = useState(null);
   const router = useRouter();
-  const privatePaths = ["/rsvp/confirm"];
+  const privatePaths = ["/rsvp/confirm", "/rsvp/edit"];
   const path = router.asPath.split("?")[0];
 
   useSWR("/api/auth/refresh-token", authFetcher, {

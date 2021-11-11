@@ -5,6 +5,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useRef, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+import rsvpImage from "public/imgs/rsvp.jpg";
 import { useAuthentication } from "contexts/AuthenticationContext";
 import PageLayout from "components/PageLayout";
 import styles from "styles/RSVP.module.css";
@@ -49,15 +50,12 @@ const RSVP = () => {
   return (
     <PageLayout>
       <div className={styles.main}>
-        <div className={styles.imageWrapper}>
-          <Image
-            src="/imgs/rsvp.jpg"
-            layout="fill"
-            alt="rsvp image"
-            objectFit="cover"
-            objectPosition="center 35%"
-          />
-        </div>
+        <Image
+          src={rsvpImage}
+          alt="rsvp image"
+          objectFit="cover"
+          objectPosition="center 35%"
+        />
 
         <h1 className="display-3 text-center pt-5">
           We can&apos;t wait for you to celebrate with us!
