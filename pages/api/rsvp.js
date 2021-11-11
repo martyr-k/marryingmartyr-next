@@ -1,57 +1,31 @@
-// import nc from "next-connect";
+import nc from "next-connect";
 
-// const handler = nc();
+import dbConnect from "lib/dbConnect";
+import Code from "models/codes";
+import { secured } from "lib/middleware";
 
-// handler.use(dbConnect, secured).post(async (req, res) => {
-//   try {
-//     const { inviteCode } = req.body;
+const handler = nc();
 
-//     if (!inviteCode) {
-//       throw new Error("Please enter a code prior to clicking submit.");
-//     }
+handler.use(dbConnect, secured).post(async (req, res) => {
+  try {
+    const { song, artist, confirmedGuests } = req.body;
+    // const code = await Code.findById(req.code._id);
 
-//     const code = await Code.findOne({
-//       identifier: `${inviteCode}KV`,
-//     }).select("+inviteCode");
+    // code.rsvp = true;
+    // code.confirmedGuests = confirmedGuests;
+    // if (song || artist) {
+    //   code.song = `${req.body.artist} - ${req.body.song}`;
+    // }
 
-//     if (!code) {
-//       throw new Error(
-//         "The code you have entered is invalid, please try again."
-//       );
-//     }
+    // await code.save();
 
-//     if (code && (await code.comparePassword(inviteCode, code.inviteCode))) {
-//       if (code.attendance === "virtual") {
-//         // - send rsvp confirmation email
+    res.status(201).json({ status: "success" });
+  } catch (error) {
+    res.status(400).json({
+      status: "failure",
+      message: error.message,
+    });
+  }
+});
 
-//         code.rsvp = true;
-//         await code.save();
-
-//         sendToken(200, code, req, res);
-//       } else {
-//         const data = {
-//           id: code._id,
-//           attendance: code.attendance,
-//           invitedGuests: code.invitedGuests,
-//           rsvp: code.rsvp,
-//         };
-
-//         res.status(200).json({
-//           status: "success",
-//           data,
-//         });
-//       }
-//     } else {
-//       throw new Error(
-//         "The code you have entered is invalid, please try again."
-//       );
-//     }
-//   } catch (error) {
-//     res.status(400).json({
-//       status: "failure",
-//       message: error.message,
-//     });
-//   }
-// });
-
-// export default handler;
+export default handler;

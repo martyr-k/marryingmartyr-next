@@ -41,6 +41,7 @@ const RSVP = () => {
       );
 
       toast.success("RSVP Confirmed!");
+      Router.replace("/");
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);
