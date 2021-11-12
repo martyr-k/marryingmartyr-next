@@ -39,7 +39,7 @@ const NavigationBar = () => {
                 <Nav.Link className={styles.navLink}>RSVP</Nav.Link>
               </Link>
             )}
-            <Link href="/rsvp" passHref>
+            <Link href="/our-story" passHref>
               <Nav.Link className={styles.navLink}>Our Story</Nav.Link>
             </Link>
             <Link href="/rsvp" passHref>

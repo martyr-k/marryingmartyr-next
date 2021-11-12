@@ -5,7 +5,7 @@ import Image from "next/dist/client/image";
 import homeImage1 from "public/imgs/home-image-3.jpg";
 import homeImage2 from "public/imgs/home-image-2.jpg";
 import homeImage3 from "public/imgs/home-image-1.jpg";
-import styles from "../styles/Home.module.css";
+import styles from "styles/Home.module.css";
 
 const Home = () => {
   const [remaining, setRemaining] = useState();
