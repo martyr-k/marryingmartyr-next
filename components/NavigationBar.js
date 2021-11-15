@@ -39,25 +39,31 @@ const NavigationBar = () => {
                 <Nav.Link className={styles.navLink}>RSVP</Nav.Link>
               </Link>
             )}
-            <Link href="/our-story" passHref>
-              <Nav.Link className={styles.navLink}>Our Story</Nav.Link>
-            </Link>
+            {code && (
+              <Link href="/our-story" passHref>
+                <Nav.Link className={styles.navLink}>Our Story</Nav.Link>
+              </Link>
+            )}
             <Link href="/faq" passHref>
               <Nav.Link className={styles.navLink}>FAQ</Nav.Link>
             </Link>
-            <Link href="/registry" passHref>
-              <Nav.Link className={styles.navLink}>Registry</Nav.Link>
-            </Link>
-            <Link href="/wedding-party" passHref>
-              <Nav.Link className={styles.navLink}>Wedding Party</Nav.Link>
-            </Link>
-            <Link href="/livestream" passHref>
-              <Nav.Link className={styles.navLink}>Livestream</Nav.Link>
-            </Link>
-            {["admin"].includes(code?.role) && (
-              <Link href="/dashboard" passHref>
-                <Nav.Link className={styles.navLink}>Dashboard</Nav.Link>
-              </Link>
+            {code && (
+              <>
+                <Link href="/registry" passHref>
+                  <Nav.Link className={styles.navLink}>Registry</Nav.Link>
+                </Link>
+                <Link href="/wedding-party" passHref>
+                  <Nav.Link className={styles.navLink}>Wedding Party</Nav.Link>
+                </Link>
+                <Link href="/livestream" passHref>
+                  <Nav.Link className={styles.navLink}>Livestream</Nav.Link>
+                </Link>
+                {["admin"].includes(code?.role) && (
+                  <Link href="/dashboard" passHref>
+                    <Nav.Link className={styles.navLink}>Dashboard</Nav.Link>
+                  </Link>
+                )}
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

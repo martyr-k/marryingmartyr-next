@@ -48,7 +48,7 @@ const RSVP = () => {
   };
 
   return (
-    <PageLayout>
+    <PageLayout title="RSVP">
       <div className={styles.main}>
         <Image
           src={rsvpImage}

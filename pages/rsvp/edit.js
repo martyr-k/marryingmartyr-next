@@ -98,7 +98,7 @@ const EditRSVP = () => {
   return isLoading ? (
     <LoadingSpinner />
   ) : (
-    <PageLayout>
+    <PageLayout title="Edit RSVP">
       <div className={styles.main}>
         <Image
           src={rsvpImage}

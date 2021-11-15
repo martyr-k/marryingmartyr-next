@@ -72,7 +72,7 @@ const RSVP = () => {
   return isLoading ? (
     <LoadingSpinner />
   ) : (
-    <PageLayout>
+    <PageLayout title="Confirm RSVP">
       <div className={styles.main}>
         <Image
           src={rsvpImage}
