@@ -20,6 +20,7 @@ function AuthenticationProvider({ children }) {
     "/rsvp/edit",
     "/rsvp/confirm",
     "our-story",
+    "/registry",
   ];
   const path = router.asPath.split("?")[0];
 

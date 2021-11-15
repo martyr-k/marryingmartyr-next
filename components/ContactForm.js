@@ -103,7 +103,9 @@ const ContactForm = ({ show, toggleModal }) => {
             <Button className="me-2" variant="secondary" onClick={toggleModal}>
               Close
             </Button>
-            <Button variant="primary">Submit</Button>
+            <button type="submit" className="btn btn-burgundy">
+              Submit
+            </button>
           </div>
         </form>
       </Modal.Body>

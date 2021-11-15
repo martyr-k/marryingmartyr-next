@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Goudos";
+  src: url("/fonts/GOUDOSI.TTF");
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -47,4 +52,16 @@ textarea {
 .accordion-body span.text-dark {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.btn-burgundy {
+  background-color: #590e1e;
+  color: white;
+}
+
+@media (hover: hover) {
+  .btn-burgundy:hover {
+    background-color: #4b0a18;
+    color: white;
+  }
 }

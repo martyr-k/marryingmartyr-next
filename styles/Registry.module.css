@@ -1,0 +1,72 @@
+.main {
+  min-height: 90vh;
+  background-color: rgb(158, 111, 111);
+  color: white;
+  font-family: "Playfair Display SC", serif;
+}
+
+.header {
+  font-family: "Goudos";
+}
+
+.vendor,
+.cash {
+  font-family: "Playfair Display", serif;
+}
+.vendor,
+.cash {
+  background-color: rgb(138, 98, 98);
+  border-radius: 0.3rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+.vendor img {
+  height: unset !important;
+  min-height: unset !important;
+}
+.vendor ol {
+  margin-bottom: 0;
+}
+.vendor li {
+  margin-bottom: 0.5rem;
+}
+.vendor a {
+  color: #590e1e;
+}
+
+.cash h2 {
+  font-family: "Playfair Display SC", serif;
+}
+.cash hr {
+  flex-grow: 1;
+  height: 1px;
+}
+.check {
+  color: rgb(50, 196, 141);
+}
+.check span {
+  color: white;
+  font-style: normal;
+}
+.cashInput {
+  background-color: #efefef;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  color: black;
+}
+.cashInput input {
+  background-color: #efefef;
+}
+/* hide arrow on input */
+.cashInput input::-webkit-outer-spin-button,
+.cashInput input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* media queries */
+@media only screen and (min-width: 768px) {
+  .cashInput {
+    border-bottom-left-radius: 0rem;
+    border-top-right-radius: 0.3rem;
+  }
+}
