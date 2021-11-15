@@ -12,6 +12,9 @@ a {
 .cursor-pointer {
   cursor: pointer;
 }
+textarea {
+  resize: none;
+}
 
 /* faq */
 .accordion,

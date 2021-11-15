@@ -1,13 +1,25 @@
 import { Container, Accordion } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
+import useToggle from "hooks/useToggle";
+import ContactForm from "components/ContactForm";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 import PageLayout from "components/PageLayout";
 import styles from "styles/FAQ.module.css";
 
+function CustomToggle({ children, eventKey }) {
+  const handleClick = useAccordionButton(eventKey);
+
+  return (
+    <span className="text-dark" onClick={handleClick}>
+      {children}
+    </span>
+  );
+}
+
 const FAQ = () => {
   const { code } = useAuthenticatedClient();
-  const toggleItemThree = useAccordionButton("3");
+  const [show, toggleModal] = useToggle(false);
 
   return (
     <PageLayout title="FAQ">
@@ -182,9 +194,9 @@ const FAQ = () => {
                     your favourite tunes, and you can dance the night away!
                     However, we ask that everyone follow the COVID-19 protocols
                     in effect at the time regarding social distancing.{" "}
-                    <span className="text-dark" onClick={toggleItemThree}>
+                    <CustomToggle eventKey="2">
                       (See COVID-19 Polices & Precautions)
-                    </span>
+                    </CustomToggle>
                   </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="7">
@@ -223,6 +235,13 @@ const FAQ = () => {
               </>
             )}
           </Accordion>
+          <div className="text-center">
+            <button className="btn btn-light mt-5" onClick={toggleModal}>
+              For further questions, concerns or FAQ-based suggestions click
+              here to contact us!
+            </button>
+          </div>
+          <ContactForm show={show} toggleModal={toggleModal} />
         </Container>
       </div>
     </PageLayout>
