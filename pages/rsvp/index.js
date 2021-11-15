@@ -5,6 +5,8 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useRef, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+import useToggle from "hooks/useToggle";
+import ContactForm from "components/ContactForm";
 import rsvpImage from "public/imgs/rsvp.jpg";
 import { useAuthentication } from "contexts/AuthenticationContext";
 import PageLayout from "components/PageLayout";
@@ -14,6 +16,7 @@ const RSVP = () => {
   const inviteCodeRef = useRef();
   const { token, setToken } = useAuthentication();
   const [code, setCode] = useState();
+  const [show, toggleModal] = useToggle(false);
 
   useEffect(() => {
     if (token) {
@@ -78,6 +81,13 @@ const RSVP = () => {
             Submit
           </Button>
         </Form>
+
+        <div className="text-center">
+          <button className="btn btn-light mt-5" onClick={toggleModal}>
+            If you have any questions click here to contact us!
+          </button>
+        </div>
+        <ContactForm show={show} toggleModal={toggleModal} />
       </div>
     </PageLayout>
   );
