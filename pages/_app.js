@@ -9,7 +9,7 @@ function App({ Component, pageProps }) {
   return (
     <>
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={3000}
         hideProgressBar={true}
         rtl={false}

@@ -1,15 +1,69 @@
 import { Container } from "react-bootstrap";
 import Image from "next/image";
+import { useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
+import { useAuthentication } from "contexts/AuthenticationContext";
+import useInput from "hooks/useInput";
 import PageLayout from "components/PageLayout";
 import LoadingSpinner from "components/LoadingSpinner";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 import styles from "styles/Registry.module.css";
 import amazonLogo from "public/imgs/amazon.png";
 import bedBathLogo from "public/imgs/bedbath.png";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 const Registry = () => {
-  const { code, isLoading } = useAuthenticatedClient("/rsvp");
+  const { token } = useAuthentication();
+  const { isLoading } = useAuthenticatedClient("/rsvp");
+  const { value: amount, handleChange } = useInput("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      toast.success("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("cancelled")) {
+      toast.error("Transaction cancelled, you have not been charged.");
+    }
+  }, []);
+
+  const createCheckoutSession = async (event) => {
+    try {
+      event.preventDefault();
+
+      const session = await axios.post(
+        "/api/create-checkout-session",
+        {
+          amount,
+        },
+        {
+          headers: {
+            authorization: token.value,
+          },
+        }
+      );
+
+      const stripe = await stripePromise;
+
+      return stripe.redirectToCheckout({
+        sessionId: session.data.data.id,
+      });
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      }
+      console.log(error);
+    }
+  };
 
   return isLoading ? (
     <LoadingSpinner />
@@ -86,7 +140,7 @@ const Registry = () => {
             <div className="row gx-0">
               <div className="col-auto d-flex mx-auto ps-4 ps-lg-0">
                 <Image
-                  classNameName="align-self-center"
+                  className="align-self-center"
                   src={bedBathLogo}
                   width={300}
                   height={200}
@@ -172,7 +226,7 @@ const Registry = () => {
               <div
                 className={`${styles.cashInput} col-md-3 d-flex justify-content-center align-items-center py-4 gx-4 gx-xl-0`}
               >
-                <form id="cash-form">
+                <form onSubmit={createCheckoutSession}>
                   <div className="mb-2">
                     <label className="form-label" htmlFor="cash-gift-amount">
                       Enter Gift Amount ($CAD):
@@ -180,7 +234,8 @@ const Registry = () => {
                     <input
                       className="form-control"
                       type="number"
-                      id="cash-gift-amount"
+                      onChange={handleChange}
+                      value={amount}
                       min="1"
                       required
                     />

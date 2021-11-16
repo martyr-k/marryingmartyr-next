@@ -31,6 +31,7 @@
 }
 .vendor a {
   color: #590e1e;
+  text-decoration: underline;
 }
 
 .cash h2 {
@@ -68,5 +69,10 @@
   .cashInput {
     border-bottom-left-radius: 0rem;
     border-top-right-radius: 0.3rem;
+  }
+}
+@media (hover: hover) {
+  .vendor a:hover {
+    color: #590e1ebe;
   }
 }
