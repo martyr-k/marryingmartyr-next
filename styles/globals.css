@@ -20,6 +20,19 @@ a {
 textarea {
   resize: none;
 }
+.modal-content {
+  overflow: hidden;
+}
+.btn-burgundy {
+  background-color: #590e1e;
+  color: white;
+}
+@media (hover: hover) {
+  .btn-burgundy:hover {
+    background-color: #4b0a18;
+    color: white;
+  }
+}
 
 /* faq */
 .accordion,
@@ -52,16 +65,4 @@ textarea {
 .accordion-body span.text-dark {
   text-decoration: underline;
   cursor: pointer;
-}
-
-.btn-burgundy {
-  background-color: #590e1e;
-  color: white;
-}
-
-@media (hover: hover) {
-  .btn-burgundy:hover {
-    background-color: #4b0a18;
-    color: white;
-  }
 }

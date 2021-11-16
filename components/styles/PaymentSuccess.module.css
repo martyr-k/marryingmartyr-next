@@ -1,0 +1,20 @@
+.header {
+  font-family: "Playfair Display SC", serif;
+  border-color: rgb(126, 87, 87);
+  background-color: rgb(158, 111, 111);
+  color: #fcf6f2;
+}
+.body {
+  font-family: "Playfair Display", serif;
+  background-color: rgb(158, 111, 111);
+  color: #fcf6f2;
+}
+.imageContainer {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+}

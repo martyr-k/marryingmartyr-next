@@ -7,7 +7,7 @@ import dbConnect from "lib/dbConnect";
 const handler = nc();
 
 handler.use(dbConnect, secured).post(async (req, res) => {
-  //   console.log(`${req.protocol}://${req.headers.host}/registry?success`);
+  const development = process.env.NODE_ENV === "development";
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -30,8 +30,16 @@ handler.use(dbConnect, secured).post(async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `http://${req.headers.host}/registry?success=true`,
-      cancel_url: `http://${req.headers.host}/registry?cancelled=true`,
+      success_url: `${
+        development
+          ? "http://localhost:3000/registry?success=true"
+          : "https://marryingmartyr.ca/registry?success=true"
+      }`,
+      cancel_url: `${
+        development
+          ? "http://localhost:3000/registry?cancelled=true"
+          : "https://marryingmartyr.ca/registry?cancelled=true"
+      }`,
     });
 
     res.status(200).json({

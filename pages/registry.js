@@ -1,9 +1,12 @@
 import { Container } from "react-bootstrap";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
 
+import PaymentSuccess from "components/PaymentSuccess";
+import useToggle from "hooks/useToggle";
 import { useAuthentication } from "contexts/AuthenticationContext";
 import useInput from "hooks/useInput";
 import PageLayout from "components/PageLayout";
@@ -12,7 +15,6 @@ import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 import styles from "styles/Registry.module.css";
 import amazonLogo from "public/imgs/amazon.png";
 import bedBathLogo from "public/imgs/bedbath.png";
-import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -22,13 +24,14 @@ const Registry = () => {
   const { token } = useAuthentication();
   const { isLoading } = useAuthenticatedClient("/rsvp");
   const { value: amount, handleChange } = useInput("");
+  const [successModal, setSuccessModal] = useState(false);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
 
     if (query.get("success")) {
-      toast.success("Order placed! You will receive an email confirmation.");
+      setSuccessModal(true);
     }
 
     if (query.get("cancelled")) {
@@ -251,6 +254,10 @@ const Registry = () => {
             </div>
           </section>
         </Container>
+        <PaymentSuccess
+          successModal={successModal}
+          handleClose={setSuccessModal}
+        />
       </div>
     </PageLayout>
   );
