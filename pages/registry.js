@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
 
 import PaymentSuccess from "components/PaymentSuccess";
+import ContactForm from "components/ContactForm";
 import useToggle from "hooks/useToggle";
 import { useAuthentication } from "contexts/AuthenticationContext";
 import useInput from "hooks/useInput";
@@ -25,6 +26,7 @@ const Registry = () => {
   const { isLoading } = useAuthenticatedClient("/rsvp");
   const { value: amount, handleChange } = useInput("");
   const [successModal, setSuccessModal] = useState(false);
+  const [show, toggleModal] = useToggle(false);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -253,7 +255,17 @@ const Registry = () => {
               </div>
             </div>
           </section>
+
+          <section className={`${styles.contact} mt-5`}>
+            <p
+              className="lead text-center cursor-pointer"
+              onClick={toggleModal}
+            >
+              If you have any questions click here to contact us!
+            </p>
+          </section>
         </Container>
+        <ContactForm show={show} toggleModal={toggleModal} />
         <PaymentSuccess
           successModal={successModal}
           handleClose={setSuccessModal}

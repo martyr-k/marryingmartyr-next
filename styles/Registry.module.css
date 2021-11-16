@@ -10,7 +10,8 @@
 }
 
 .vendor,
-.cash {
+.cash,
+.contact {
   font-family: "Playfair Display", serif;
 }
 .vendor,
@@ -62,6 +63,10 @@
 .cashInput input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.contact p:hover {
+  text-decoration: underline;
 }
 
 /* media queries */
