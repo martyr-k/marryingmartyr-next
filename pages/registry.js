@@ -13,9 +13,9 @@ import useInput from "hooks/useInput";
 import PageLayout from "components/PageLayout";
 import LoadingSpinner from "components/LoadingSpinner";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
-import styles from "styles/Registry.module.css";
 import amazonLogo from "public/imgs/amazon.png";
 import bedBathLogo from "public/imgs/bedbath.png";
+import styles from "styles/Registry.module.css";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -37,7 +37,7 @@ const Registry = () => {
     }
 
     if (query.get("cancelled")) {
-      toast.error("Transaction cancelled, you have not been charged.");
+      toast.error("Transaction aborted, you have not been charged.");
     }
   }, []);
 

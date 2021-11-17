@@ -1,0 +1,44 @@
+.main {
+  min-height: 90vh;
+  background-color: rgb(158, 111, 111);
+  color: white;
+  font-family: "Playfair Display SC", serif;
+}
+
+.introduction {
+  font-family: "Goudos";
+}
+
+.sectionImage {
+  width: 100%;
+  height: 300px;
+  display: block;
+  margin: 0 auto;
+  border: solid 3px white;
+  position: relative;
+}
+.weddingPartyImage {
+  width: 300px;
+  height: 200px;
+  display: block;
+  border: solid 3px white;
+  position: relative;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1399px) {
+  .weddingPartyImage {
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width: 400px) {
+  .sectionImage {
+    width: 400px;
+  }
+}
+@media only screen and (max-width: 319px) {
+  .sectionImage,
+  .weddingPartyImage {
+    width: 250px;
+  }
+}

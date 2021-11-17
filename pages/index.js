@@ -9,7 +9,7 @@ import styles from "styles/Home.module.css";
 
 const Home = () => {
   const [remaining, setRemaining] = useState();
-  const countdownDate = "December 12, 2021 13:56:00";
+  const countdownDate = "October 3, 2021 13:30:00";
 
   useEffect(() => {
     const calcDate = () => {
@@ -18,7 +18,7 @@ const Home = () => {
       const difference = targetDate - currentDate;
 
       if (difference <= 0) {
-        setRemaining("Expired");
+        setRemaining("Happily Married!");
       } else {
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
