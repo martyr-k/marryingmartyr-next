@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CSSTransition } from "react-transition-group";
 
-import useToggle from "hooks/useToggle";
+// import useToggle from "hooks/useToggle";
 import styles from "./styles/WeddingPartyCard.module.css";
 
 const WeddingPartyCard = ({
@@ -12,8 +12,19 @@ const WeddingPartyCard = ({
   priority,
   objectPosition,
   bottom,
+  flip,
+  handleFlip,
+  index,
 }) => {
-  const [flip, toggleFlip] = useToggle(false);
+  //   const [flip, toggleFlip] = useToggle(false);
+  const handleClick = () => {
+    console.log(index);
+    handleFlip(index);
+  };
+
+  const handleClose = () => {
+    handleFlip();
+  };
 
   return (
     <div
@@ -22,7 +33,7 @@ const WeddingPartyCard = ({
       }`}
     >
       {!flip && (
-        <div className={styles.front} onClick={toggleFlip}>
+        <div className={styles.front} onClick={handleClick}>
           <div
             className={`${styles.image} ${
               position === "right" && "ms-xxl-auto"
@@ -52,7 +63,10 @@ const WeddingPartyCard = ({
             classNames={position === "center" && "w-75 mx-auto"}
             dangerouslySetInnerHTML={{ __html: description }}
           ></p>
-          <i className="bi bi-x-circle cursor-pointer" onClick={toggleFlip}></i>
+          <i
+            className="bi bi-x-circle cursor-pointer"
+            onClick={handleClose}
+          ></i>
         </div>
       </CSSTransition>
     </div>

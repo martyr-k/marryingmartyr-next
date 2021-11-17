@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import Image from "next/image";
+import { useState } from "react";
 
 import weddingParty from "lib/wedding-party";
 import WeddingPartyCard from "components/WeddingPartyCard";
@@ -8,8 +9,17 @@ import LoadingSpinner from "components/LoadingSpinner";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 import styles from "styles/WeddingParty.module.css";
 
-const WeddingParty = () => {
+const WeddingParty = ({ weddingParty: party }) => {
   const { isLoading } = useAuthenticatedClient("/rsvp");
+  const [flippedArr, setFlippedArr] = useState(new Array(14).fill(false));
+
+  const handleFlip = (index) => {
+    const updatedFlipArr = new Array(14).fill(false);
+    if (index >= 0) {
+      updatedFlipArr[index] = true;
+    }
+    setFlippedArr(updatedFlipArr);
+  };
 
   return isLoading ? (
     <LoadingSpinner />
@@ -38,7 +48,10 @@ const WeddingParty = () => {
               <div className="row mb-5">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
                   <WeddingPartyCard
-                    {...weddingParty[0]}
+                    {...party[0]}
+                    flip={flippedArr[0]}
+                    index={0}
+                    handleFlip={handleFlip}
                     position="left"
                     objectPosition="center 20%"
                     priority
@@ -46,7 +59,10 @@ const WeddingParty = () => {
                 </div>
                 <div className="col-xxl-6">
                   <WeddingPartyCard
-                    {...weddingParty[1]}
+                    {...party[1]}
+                    flip={flippedArr[1]}
+                    index={1}
+                    handleFlip={handleFlip}
                     position="right"
                     objectPosition="top"
                     priority
@@ -56,7 +72,10 @@ const WeddingParty = () => {
               <div className="row mb-5">
                 <div className="col-12">
                   <WeddingPartyCard
-                    {...weddingParty[2]}
+                    {...party[2]}
+                    flip={flippedArr[2]}
+                    index={2}
+                    handleFlip={handleFlip}
                     position="center"
                     objectPosition="top"
                   />
@@ -65,14 +84,20 @@ const WeddingParty = () => {
               <div className="row mb-5">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
                   <WeddingPartyCard
-                    {...weddingParty[3]}
+                    {...party[3]}
+                    flip={flippedArr[3]}
+                    index={3}
+                    handleFlip={handleFlip}
                     position="left"
                     objectPosition="top"
                   />
                 </div>
                 <div className="col-xxl-6">
                   <WeddingPartyCard
-                    {...weddingParty[4]}
+                    {...party[4]}
+                    flip={flippedArr[4]}
+                    index={4}
+                    handleFlip={handleFlip}
                     position="right"
                     objectPosition="top"
                   />
@@ -81,7 +106,10 @@ const WeddingParty = () => {
               <div className="row">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
                   <WeddingPartyCard
-                    {...weddingParty[5]}
+                    {...party[5]}
+                    flip={flippedArr[5]}
+                    index={5}
+                    handleFlip={handleFlip}
                     position="left"
                     objectPosition="top"
                     bottom
@@ -89,7 +117,10 @@ const WeddingParty = () => {
                 </div>
                 <div className="col-xxl-6">
                   <WeddingPartyCard
-                    {...weddingParty[6]}
+                    {...party[6]}
+                    flip={flippedArr[6]}
+                    index={6}
+                    handleFlip={handleFlip}
                     position="right"
                     objectPosition="top"
                     bottom
@@ -112,7 +143,10 @@ const WeddingParty = () => {
               <div className="row mb-5">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
                   <WeddingPartyCard
-                    {...weddingParty[7]}
+                    {...party[7]}
+                    flip={flippedArr[7]}
+                    index={7}
+                    handleFlip={handleFlip}
                     position="left"
                     objectPosition="top"
                     priority
@@ -120,7 +154,10 @@ const WeddingParty = () => {
                 </div>
                 <div className="col-xxl-6">
                   <WeddingPartyCard
-                    {...weddingParty[8]}
+                    {...party[8]}
+                    flip={flippedArr[8]}
+                    index={8}
+                    handleFlip={handleFlip}
                     position="right"
                     objectPosition="center 20%"
                     priority
@@ -130,7 +167,10 @@ const WeddingParty = () => {
               <div className="row mb-5">
                 <div className="col-12">
                   <WeddingPartyCard
-                    {...weddingParty[9]}
+                    {...party[9]}
+                    flip={flippedArr[9]}
+                    index={9}
+                    handleFlip={handleFlip}
                     position="center"
                     objectPosition="top"
                   />
@@ -139,14 +179,20 @@ const WeddingParty = () => {
               <div className="row mb-5">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
                   <WeddingPartyCard
-                    {...weddingParty[10]}
+                    {...party[10]}
+                    flip={flippedArr[10]}
+                    index={10}
+                    handleFlip={handleFlip}
                     position="left"
                     objectPosition="top"
                   />
                 </div>
                 <div className="col-xxl-6">
                   <WeddingPartyCard
-                    {...weddingParty[11]}
+                    {...party[11]}
+                    flip={flippedArr[11]}
+                    index={11}
+                    handleFlip={handleFlip}
                     position="right"
                     objectPosition="center 40%"
                   />
@@ -155,7 +201,10 @@ const WeddingParty = () => {
               <div className="row">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
                   <WeddingPartyCard
-                    {...weddingParty[12]}
+                    {...party[12]}
+                    flip={flippedArr[12]}
+                    index={12}
+                    handleFlip={handleFlip}
                     position="left"
                     objectPosition="top"
                     bottom
@@ -163,7 +212,10 @@ const WeddingParty = () => {
                 </div>
                 <div className="col-xxl-6">
                   <WeddingPartyCard
-                    {...weddingParty[13]}
+                    {...party[13]}
+                    flip={flippedArr[13]}
+                    index={13}
+                    handleFlip={handleFlip}
                     position="right"
                     objectPosition="top"
                     bottom
