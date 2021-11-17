@@ -10,6 +10,14 @@
 }
 .navLink > div {
   background-color: black;
-  margin-top: 1rem !important;
   text-align: center;
+}
+.navLink > div > span:active {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .navLink > div {
+    margin-top: 1rem !important;
+  }
 }
