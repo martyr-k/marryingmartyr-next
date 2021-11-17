@@ -22,6 +22,7 @@ function AuthenticationProvider({ children }) {
     "our-story",
     "/registry",
     "/wedding-party",
+    "livestream",
   ];
   const path = router.asPath.split("?")[0];
 

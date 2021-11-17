@@ -1,10 +1,10 @@
 import Head from "next/head";
 import PropTypes from "prop-types";
 
-import Footer from "./Footer";
 import NavigationBar from "./NavigationBar";
+import Footer from "./Footer";
 
-const PageLayout = ({ children, title }) => {
+const PageLayout = ({ children, title, footer = true }) => {
   return (
     <>
       <Head>
@@ -12,7 +12,7 @@ const PageLayout = ({ children, title }) => {
       </Head>
       <NavigationBar />
       {children}
-      <Footer />
+      {footer && <Footer />}
     </>
   );
 };
