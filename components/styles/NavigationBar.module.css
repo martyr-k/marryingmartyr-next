@@ -5,3 +5,11 @@
   font-size: 1.2rem;
   color: rgb(201, 175, 98) !important;
 }
+.navLink > a {
+  color: rgb(201, 175, 98) !important;
+}
+.navLink > div {
+  background-color: black;
+  margin-top: 1rem !important;
+  text-align: center;
+}

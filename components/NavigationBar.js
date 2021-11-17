@@ -1,6 +1,4 @@
-import { Container } from "react-bootstrap";
-import { Navbar } from "react-bootstrap";
-import { Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -59,9 +57,26 @@ const NavigationBar = () => {
                   <Nav.Link className={styles.navLink}>Livestream</Nav.Link>
                 </Link>
                 {["admin"].includes(code?.role) && (
-                  <Link href="/dashboard" passHref>
-                    <Nav.Link className={styles.navLink}>Dashboard</Nav.Link>
-                  </Link>
+                  <NavDropdown
+                    className={styles.navLink}
+                    title="Dashboard"
+                    menuVariant="dark"
+                  >
+                    <NavDropdown.Item as="span">
+                      <Link href="/register-invitees" passHref>
+                        <Nav.Link className={styles.navLink}>
+                          Register Invitees
+                        </Nav.Link>
+                      </Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item className={styles.navLink} as="span">
+                      <Link href="/view-invitees" passHref>
+                        <Nav.Link className={styles.navLink}>
+                          View Invitees
+                        </Nav.Link>
+                      </Link>
+                    </NavDropdown.Item>
+                  </NavDropdown>
                 )}
               </>
             )}

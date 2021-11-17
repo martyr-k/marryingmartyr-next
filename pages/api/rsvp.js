@@ -11,6 +11,10 @@ handler.use(dbConnect, secured).patch(async (req, res) => {
     const { song, artist, confirmedGuests } = req.body;
     const code = await Code.findById(req.code._id);
 
+    if (code?.attendance !== "in-person") {
+      throw new Error("Unauthorized user!");
+    }
+
     code.rsvp = true;
     code.confirmedGuests = confirmedGuests;
     if (song || artist) {
