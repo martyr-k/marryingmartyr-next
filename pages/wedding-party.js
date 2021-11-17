@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import Image from "next/image";
 
+import weddingParty from "lib/wedding-party";
 import WeddingPartyCard from "components/WeddingPartyCard";
 import PageLayout from "components/PageLayout";
 import LoadingSpinner from "components/LoadingSpinner";
@@ -36,246 +37,63 @@ const WeddingParty = () => {
               <h2 className="text-center mb-5">Bride&apos;s Squad</h2>
               <div className="row mb-5">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
-                  <WeddingPartyCard />
+                  <WeddingPartyCard
+                    {...weddingParty[0]}
+                    position="left"
+                    objectPosition="center 20%"
+                    priority
+                  />
                 </div>
                 <div className="col-xxl-6">
-                  <div>
-                    <div className={`${styles.weddingPartyImage} ms-xxl-auto`}>
-                      <Image
-                        src="/imgs/bea.jpg"
-                        layout="fill"
-                        alt="Bea Tongco"
-                        objectFit="cover"
-                        objectPosition="top"
-                        priority
-                      />
-                    </div>
-                    <h2 className="mt-2 text-center text-xxl-end">
-                      Bea Tongco
-                    </h2>
-                    <div className="d-none">
-                      <p>
-                        Victoria and I first met at the “Vic One: Ryerson
-                        Stream” orientation at the University of Toronto - which
-                        was made up of other students interested in becoming
-                        teachers. I was having a conversation with Victoria’s
-                        mom and that’s when we realized we lived in Ajax. I
-                        ended up exchanging phone numbers with Victoria but
-                        didn’t talk to her until our first day of University. On
-                        our first day of Vic One, Victoria and I ran into each
-                        other on the Go Train. We sat together and instantly
-                        became friends. We spent the next 5 years talking about
-                        our lives in detail, catching Go Trains, taking subway
-                        rides to classes that were not that far, failing exams,
-                        procrastinating on assignments and staying up VERY late
-                        to finish those assignments. We became best friends and
-                        “twinions” (twin minions) for life! Our friendship is so
-                        special to me because we shared important moments in our
-                        lives - from graduating to decorating her first
-                        classroom. Victoria is one of my best friends and I
-                        couldn’t feel more blessed to be a part of her and
-                        Kelub’s special day. 😊
-                      </p>
-                      <i className="bi bi-x-circle"></i>
-                    </div>
-                  </div>
+                  <WeddingPartyCard
+                    {...weddingParty[1]}
+                    position="right"
+                    objectPosition="top"
+                    priority
+                  />
                 </div>
               </div>
               <div className="row mb-5">
                 <div className="col-12">
-                  <div>
-                    <div className={`${styles.weddingPartyImage} mx-auto`}>
-                      <Image
-                        src="/imgs/kayla.jpg"
-                        layout="fill"
-                        alt="Kayla McLean"
-                        objectFit="cover"
-                        objectPosition="top"
-                      />
-                    </div>
-                    <h2 className="text-center mt-2">Kayla McLean</h2>
-                    <div className="d-none">
-                      <p className="w-75 mx-auto">
-                        My Vick ❤️ Where do I even begin? From the moment The
-                        George’s arrived at Bathurst (if you know, you know) and
-                        we sat together on them hard wooden church benches (you
-                        in the middle, always), we’ve been inseparable.
-                        TWENTY-TWO YEARS (😱)-and a whole lotta sleepovers,
-                        laughter, nonsensical videos (which shall remain in the
-                        vault 👀) and heart-to-hearts- later, you’re still my
-                        soul seester and best friend—a literal gift to all who
-                        know you. I can’t wait to see you step into this new
-                        role as wife, with the beautiful grace and light you
-                        bring with you always. To you (and my new
-                        brother-in-law, Kelub 😉), all my love, God’s greatest
-                        blessings and all the happiness in the world. ❤️
-                      </p>
-                      <i className="bi bi-x-circle"></i>
-                    </div>
-                  </div>
+                  <WeddingPartyCard
+                    {...weddingParty[2]}
+                    position="center"
+                    objectPosition="top"
+                  />
                 </div>
               </div>
               <div className="row mb-5">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
-                  <div>
-                    <div className={styles.weddingPartyImage}>
-                      <Image
-                        src="/imgs/marissa.jpg"
-                        layout="fill"
-                        alt="Marissa Blagrove"
-                        objectFit="cover"
-                        objectPosition="top"
-                      />
-                    </div>
-                    <h2 className="mt-2 text-center text-xxl-start">
-                      Marissa Blagrove
-                    </h2>
-                    <div className="d-none">
-                      <p>
-                        Ahhh, reminiscing on the good old days that are still
-                        growing!! Victoria, the Zoey to my Chloe! My fellow
-                        wedding-lover! As kids we were adventure buddies, hence
-                        our little nicknames. We first met at church but our
-                        friendship grew after becoming neighbours! As children
-                        we went to summer camps, made friendship bracelets, had
-                        a club called KRMV, sleepovers and even hid in closets
-                        pretending we were in a car LOL (our imaginations are
-                        wild, which I’ve always loved about us!) In our youth
-                        years, we went to high school together, performed in
-                        musicals, sang in church choir and let’s say...girls
-                        just wanna have fun!! As adults, we’ve continued to grow
-                        as women in our personal careers, while enjoying walks,
-                        parties, devotions and retreats. Now I could on and on
-                        into full detail of our friendship and the adventures
-                        we’ve been through but it’d turn into a novel! Overall,
-                        throughout the years, we have experienced many new
-                        things together and have learned from each, through the
-                        good and bad, side by side. Two extraverts with a
-                        passion for children. Two crazy girls who love to be the
-                        life of the party. But above all, two sisters in Christ
-                        who always got each other&apos;s back. Today, we are
-                        soul sisters for life! Now here we are, at the start of
-                        another new chapter! Cheers to the moment we’ve spoken
-                        about our ENTIRE lives!!
-                      </p>
-                      <i className="bi bi-x-circle"></i>
-                    </div>
-                  </div>
+                  <WeddingPartyCard
+                    {...weddingParty[3]}
+                    position="left"
+                    objectPosition="top"
+                  />
                 </div>
                 <div className="col-xxl-6">
-                  <div>
-                    <div className={`${styles.weddingPartyImage} ms-xxl-auto`}>
-                      <Image
-                        src="/imgs/nykea.jpg"
-                        layout="fill"
-                        alt="Nykea Lyons"
-                        objectFit="cover"
-                        objectPosition="top"
-                      />
-                    </div>
-                    <h2 className="mt-2 text-center text-xxl-end">
-                      Nykea Lyons
-                    </h2>
-                    <div className="d-none">
-                      <p>
-                        We met when I was in 6th grade and you were in 7th. At
-                        that time at Dr. Roberta Bondar we had no idea how
-                        special we would become to each other. Fast forward to
-                        the end of High School and we meet again in the House of
-                        God and I am very grateful for that. Juliet you are a
-                        ray of sunshine who gets my jokes. We can be drunk on
-                        nothing but laughter. I love your energy, love for God
-                        and prayers. My prayer is that Kelub will continue to
-                        give you a reason to laugh and fill your days with love.
-                        <br />
-                        <br />
-                        With much love and prayer,
-                        <br />
-                        <br />
-                        Romie aka Nykea
-                      </p>
-                      <i className="bi bi-x-circle"></i>
-                    </div>
-                  </div>
+                  <WeddingPartyCard
+                    {...weddingParty[4]}
+                    position="right"
+                    objectPosition="top"
+                  />
                 </div>
               </div>
               <div className="row">
                 <div className="col-xxl-6 mb-5 mb-xxl-0">
-                  <div className="ms-xxl-5">
-                    <div className={styles.weddingPartyImage}>
-                      <Image
-                        src="/imgs/kira.jpg"
-                        layout="fill"
-                        alt="Yakira Kerr"
-                        objectFit="cover"
-                        objectPosition="top"
-                      />
-                    </div>
-                    <h2 className="mt-2 text-center text-xxl-start">
-                      Yakira Kerr
-                    </h2>
-                    <div className="d-none">
-                      <p>
-                        Hey I&apos;m Yakira but my friends call me Kira. I have
-                        known Victoria for (I can&apos;t even count the years)
-                        all I know is one sunny day she appeared in my life and
-                        the rest is history. Our relationship is a wild,
-                        adventurous and spontaneous type of friendship. She is
-                        truly a one of a kind type of friend! Being around her I
-                        can honestly say is never a dull moment! Her laugh is
-                        contagious and her jokes are hilarious. She is a dime
-                        +99 and having her in my life has been such a blessing.
-                        I could go on but I&apos;ll leave you with a quote.
-                        <br />
-                        <br />
-                        &quot;The most beautiful discovery true friends make is
-                        that they can grow separately without growing
-                        apart.&quot;
-                        <br />
-                        <br />
-                        -Elisabeth Foley
-                      </p>
-                      <i className="bi bi-x-circle"></i>
-                    </div>
-                  </div>
+                  <WeddingPartyCard
+                    {...weddingParty[5]}
+                    position="left"
+                    objectPosition="top"
+                    bottom
+                  />
                 </div>
                 <div className="col-xxl-6">
-                  <div className="me-xxl-5">
-                    <div className={`${styles.weddingPartyImage} ms-xxl-auto`}>
-                      <Image
-                        src="/imgs/leah.jpg"
-                        layout="fill"
-                        alt="Leah Marty"
-                        objectFit="cover"
-                        objectPosition="top"
-                      />
-                    </div>
-                    <h2 className="mt-2 text-center text-xxl-end">
-                      Leah Marty
-                    </h2>
-                    <div className="d-none">
-                      <p>
-                        I first met Victoria at church in Ottawa when she came
-                        to visit for the first time and that day I had no clue
-                        what was coming in store for the rest of my life. Since
-                        that day, there’s been one experience after another but
-                        nothing that I would take back. I’ve always wanted to
-                        have a sister and now I finally have one. She has
-                        already helped me through different situations that only
-                        a sister could help another with. I finally have someone
-                        that I can talk about makeup with or, talk about clothes
-                        with or, give me advice someone who has wayyy more years
-                        on me could give. She’s an incredible hard worker and
-                        still she has the time to be an even better family
-                        member. I wish her prosperity and success in whatever
-                        she plans to do in the future, by the grace of God. To
-                        Victoria, my newly found sister, my new well of advice,
-                        welcome to the family and congratulations on this new
-                        journey you will embark on. ❤️
-                      </p>
-                      <i className="bi bi-x-circle"></i>
-                    </div>
-                  </div>
+                  <WeddingPartyCard
+                    {...weddingParty[6]}
+                    position="right"
+                    objectPosition="top"
+                    bottom
+                  />
                 </div>
               </div>
             </div>
@@ -545,5 +363,11 @@ const WeddingParty = () => {
     </PageLayout>
   );
 };
+
+export async function getStaticProps() {
+  return {
+    props: { weddingParty },
+  };
+}
 
 export default WeddingParty;
