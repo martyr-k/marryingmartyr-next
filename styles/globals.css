@@ -66,3 +66,19 @@ textarea {
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* wedding party */
+.intro-enter {
+  opacity: 0;
+}
+.intro-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+.intro-exit {
+  opacity: 1;
+}
+.intro-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
