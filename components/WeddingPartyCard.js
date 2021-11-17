@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { CSSTransition } from "react-transition-group";
 
-// import useToggle from "hooks/useToggle";
 import styles from "./styles/WeddingPartyCard.module.css";
 
 const WeddingPartyCard = ({
@@ -16,9 +15,7 @@ const WeddingPartyCard = ({
   handleFlip,
   index,
 }) => {
-  //   const [flip, toggleFlip] = useToggle(false);
   const handleClick = () => {
-    console.log(index);
     handleFlip(index);
   };
 
