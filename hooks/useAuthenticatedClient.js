@@ -60,7 +60,7 @@ function useAuthenticatedClient(redirectTo, ...roles) {
     }
 
     // restricted routes
-    if (roles.length > 0 && data && !roles.includes(data.user.role)) {
+    if (roles.length > 0 && data && !roles.includes(data.code.role)) {
       toast.error(
         "Unauthorized access, you do not have the required permissions to access this page."
       );

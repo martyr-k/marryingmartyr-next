@@ -42,9 +42,9 @@ const codeSchema = new mongoose.Schema({
 });
 
 codeSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+  if (!this.isModified("inviteCode")) return next();
 
-  this.password = await bcrypt.hash(this.password, 12);
+  this.inviteCode = await bcrypt.hash(this.inviteCode, 12);
 
   return next();
 });

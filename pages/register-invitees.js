@@ -12,7 +12,7 @@ import { useAuthentication } from "contexts/AuthenticationContext";
 import styles from "styles/RegisterInvitees.module.css";
 
 const RegisterInvitees = () => {
-  const { isLoading } = useAuthenticatedClient("/rsvp");
+  const { isLoading } = useAuthenticatedClient("/rsvp", "admin");
   const { token } = useAuthentication();
   const [inputState, setInputState] = useState([""]);
   const {
