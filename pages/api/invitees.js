@@ -11,11 +11,11 @@ handler.use(dbConnect, secured, restricted("admin")).post(async (req, res) => {
     const { inviteCode, attendance, invitedGuests, alias } = req.body;
 
     await Code.create({
-      inviteCode: inviteCode,
-      attendance: attendance,
-      invitedGuests: invitedGuests,
+      inviteCode,
+      attendance,
+      invitedGuests,
       identifier: `${inviteCode}KV`,
-      alias: `${alias} Family`,
+      alias,
     });
 
     res.status(201).json({

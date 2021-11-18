@@ -63,14 +63,14 @@ const NavigationBar = () => {
                     menuVariant="dark"
                   >
                     <NavDropdown.Item as="span">
-                      <Link href="/register-invitees" passHref>
+                      <Link href="/invitees/register" passHref>
                         <Nav.Link className={styles.navLink}>
                           Register Invitees
                         </Nav.Link>
                       </Link>
                     </NavDropdown.Item>
                     <NavDropdown.Item className={styles.navLink} as="span">
-                      <Link href="/view-invitees" passHref>
+                      <Link href="/invitees" passHref>
                         <Nav.Link className={styles.navLink}>
                           View Invitees
                         </Nav.Link>
