@@ -1,20 +1,35 @@
 import { Container } from "react-bootstrap";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 import useInput from "hooks/useInput";
 import AdditionalGuest from "components/AdditionalGuest";
 import PageLayout from "components/PageLayout";
 import LoadingSpinner from "components/LoadingSpinner";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
+import { useAuthentication } from "contexts/AuthenticationContext";
 import styles from "styles/RegisterInvitees.module.css";
 
 const RegisterInvitees = () => {
   const { isLoading } = useAuthenticatedClient("/rsvp");
+  const { token } = useAuthentication();
   const [inputState, setInputState] = useState([""]);
-  const { value: attendance, handleChange: setAttendance } =
-    useInput("in-person");
-  const { value: inviteCode, handleChange: setInviteCode } = useInput("");
-  const { value: alias, handleChange: setAlias } = useInput("");
+  const {
+    value: attendance,
+    handleChange: setAttendance,
+    reset: resetAttendance,
+  } = useInput("in-person");
+  const {
+    value: inviteCode,
+    handleChange: setInviteCode,
+    reset: resetInviteCode,
+  } = useInput("");
+  const {
+    value: alias,
+    handleChange: setAlias,
+    reset: resetAlias,
+  } = useInput("");
 
   const incrementGuest = (position) => {
     if (!position) {
@@ -38,13 +53,45 @@ const RegisterInvitees = () => {
     setInputState(updatedInputState);
   };
 
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+
+      await axios.post(
+        "/api/invitees",
+        {
+          alias,
+          attendance,
+          inviteCode,
+          invitedGuests: inputState,
+        },
+        {
+          headers: {
+            authorization: token.value,
+          },
+        }
+      );
+
+      toast.success("Invitee created successfully!");
+      resetAlias();
+      resetAttendance();
+      resetInviteCode();
+      setInputState([""]);
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      }
+      console.log(error);
+    }
+  };
+
   return isLoading ? (
     <LoadingSpinner />
   ) : (
     <PageLayout title="Register Invitees">
       <div className={styles.main}>
         <Container className="py-5" fluid>
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <h1>Register Invitees</h1>
             <div className="mb-3">
               <label htmlFor="inviteCode" className="form-label">
