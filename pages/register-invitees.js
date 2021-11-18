@@ -1,6 +1,8 @@
 import { Container } from "react-bootstrap";
 import { useState } from "react";
 
+import useInput from "hooks/useInput";
+import AdditionalGuest from "components/AdditionalGuest";
 import PageLayout from "components/PageLayout";
 import LoadingSpinner from "components/LoadingSpinner";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
@@ -8,39 +10,32 @@ import styles from "styles/RegisterInvitees.module.css";
 
 const RegisterInvitees = () => {
   const { isLoading } = useAuthenticatedClient("/rsvp");
-  const [additionalGuests, setAdditionalGuests] = useState(0);
+  const [inputState, setInputState] = useState([""]);
+  const { value: attendance, handleChange: setAttendance } =
+    useInput("in-person");
+  const { value: inviteCode, handleChange: setInviteCode } = useInput("");
+  const { value: alias, handleChange: setAlias } = useInput("");
 
-  const incrementGuest = (add) => {
-    if (add) {
-      setAdditionalGuests((prev) => prev + 1);
+  const incrementGuest = (position) => {
+    if (!position) {
+      setInputState([...inputState, ""]);
     } else {
-      setAdditionalGuests((prev) => prev - 1);
+      setInputState([
+        ...inputState.slice(0, position),
+        ...inputState.slice(position + 1, inputState.length),
+      ]);
     }
   };
 
-  const renderAdditionalGuests = () => {
-    const guests = [];
+  const handleInputChange = (event, position) => {
+    const updatedInputState = inputState.map((value, i) => {
+      if (position === i) {
+        return event.target.value;
+      }
+      return value;
+    });
 
-    for (let i = 0; i < additionalGuests; i++) {
-      guests.push(
-        <div className="input-group mb-3" key={i}>
-          <i
-            className={`bi bi-person-x input-group-text ${styles.removeInput}`}
-            onClick={() => incrementGuest(false)}
-          ></i>
-          <input
-            className="form-control guest"
-            type="text"
-            name="guest"
-            placeholder="Joe Smith"
-            autoComplete="off"
-            required
-          />
-        </div>
-      );
-    }
-
-    return guests;
+    setInputState(updatedInputState);
   };
 
   return isLoading ? (
@@ -58,7 +53,8 @@ const RegisterInvitees = () => {
               <input
                 className="form-control"
                 type="text"
-                name="inviteCode"
+                value={inviteCode}
+                onChange={setInviteCode}
                 id="inviteCode"
                 autoComplete="off"
               />
@@ -70,7 +66,8 @@ const RegisterInvitees = () => {
               <input
                 className="form-control"
                 type="text"
-                name="alias"
+                value={alias}
+                onChange={setAlias}
                 id="alias"
                 autoComplete="off"
               />
@@ -83,7 +80,8 @@ const RegisterInvitees = () => {
                 name="attendance"
                 id="attendance"
                 className="form-select"
-                value="in-person"
+                value={attendance}
+                onChange={setAttendance}
               >
                 <option value="in-person">In-Person</option>
                 <option value="virtual">Virtual</option>
@@ -92,21 +90,17 @@ const RegisterInvitees = () => {
             <label className="form-label d-block" htmlFor="guests">
               Guests:
             </label>
-            <div className="input-group mb-3">
-              <i
-                className={`bi bi-person-plus input-group-text ${styles.addInput}`}
-                onClick={() => incrementGuest(true)}
-              ></i>
-              <input
-                className="form-control guest"
-                type="text"
-                name="guest"
-                placeholder="Joe Smith"
-                autoComplete="off"
-                required
-              />
-            </div>
-            {renderAdditionalGuests()}
+            {inputState.map((value, i) => {
+              return (
+                <AdditionalGuest
+                  key={i}
+                  value={value}
+                  position={i}
+                  incrementGuest={incrementGuest}
+                  handleInputChange={handleInputChange}
+                />
+              );
+            })}
             <button
               className="btn btn-burgundy w-50 mx-auto d-block"
               type="submit"
