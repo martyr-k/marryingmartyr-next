@@ -20,20 +20,20 @@ const EditRSVP = () => {
     value: song,
     handleChange: handleSongChange,
     setValue: setSongValue,
-  } = useInput(code?.song.split("- ")[1] || "");
+  } = useInput(code?.song?.split("- ")[1] || "");
   const {
     value: artist,
     handleChange: handleArtistChange,
     setValue: setArtistValue,
-  } = useInput(code?.song.split(" -")[0] || "");
+  } = useInput(code?.song?.split(" -")[0] || "");
   const [checkedState, setCheckedState] = useState(
     new Array(code?.invitedGuests.length).fill(false)
   );
   const [confirmedGuests, setConfirmedGuests] = useState([]);
 
   useEffect(() => {
-    setSongValue(code?.song.split("- ")[1] || "");
-    setArtistValue(code?.song.split(" -")[0] || "");
+    setSongValue(code?.song?.split("- ")[1] || "");
+    setArtistValue(code?.song?.split(" -")[0] || "");
   }, [code?.song, setSongValue, setArtistValue, code]);
 
   useEffect(() => {
@@ -191,7 +191,7 @@ const EditRSVP = () => {
         )}
 
         {code.attendance === "virtual" && (
-          <div className="mt-5 w-75">
+          <div className="mt-5 w-75 text-center mx-auto">
             <h2>Reservation Confirmed!</h2>
             <h3>Tune in at 1:30 PM on October 3, 2021.</h3>
           </div>
