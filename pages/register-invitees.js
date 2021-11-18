@@ -1,4 +1,5 @@
 import { Container } from "react-bootstrap";
+import { useState } from "react";
 
 import PageLayout from "components/PageLayout";
 import LoadingSpinner from "components/LoadingSpinner";
@@ -7,6 +8,40 @@ import styles from "styles/RegisterInvitees.module.css";
 
 const RegisterInvitees = () => {
   const { isLoading } = useAuthenticatedClient("/rsvp");
+  const [additionalGuests, setAdditionalGuests] = useState(0);
+
+  const incrementGuest = (add) => {
+    if (add) {
+      setAdditionalGuests((prev) => prev + 1);
+    } else {
+      setAdditionalGuests((prev) => prev - 1);
+    }
+  };
+
+  const renderAdditionalGuests = () => {
+    const guests = [];
+
+    for (let i = 0; i < additionalGuests; i++) {
+      guests.push(
+        <div className="input-group mb-3" key={i}>
+          <i
+            className={`bi bi-person-x input-group-text ${styles.removeInput}`}
+            onClick={() => incrementGuest(false)}
+          ></i>
+          <input
+            className="form-control guest"
+            type="text"
+            name="guest"
+            placeholder="Joe Smith"
+            autoComplete="off"
+            required
+          />
+        </div>
+      );
+    }
+
+    return guests;
+  };
 
   return isLoading ? (
     <LoadingSpinner />
@@ -44,10 +79,13 @@ const RegisterInvitees = () => {
               <label className="form-label" htmlFor="attendance">
                 Attendance Type:
               </label>
-              <select name="attendance" id="attendance" className="form-select">
-                <option value="in-person" selected>
-                  In-Person
-                </option>
+              <select
+                name="attendance"
+                id="attendance"
+                className="form-select"
+                value="in-person"
+              >
+                <option value="in-person">In-Person</option>
                 <option value="virtual">Virtual</option>
               </select>
             </div>
@@ -55,7 +93,10 @@ const RegisterInvitees = () => {
               Guests:
             </label>
             <div className="input-group mb-3">
-              <i className="bi bi-person-plus input-group-text"></i>
+              <i
+                className={`bi bi-person-plus input-group-text ${styles.addInput}`}
+                onClick={() => incrementGuest(true)}
+              ></i>
               <input
                 className="form-control guest"
                 type="text"
@@ -65,6 +106,7 @@ const RegisterInvitees = () => {
                 required
               />
             </div>
+            {renderAdditionalGuests()}
             <button
               className="btn btn-burgundy w-50 mx-auto d-block"
               type="submit"
