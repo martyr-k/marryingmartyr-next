@@ -23,8 +23,11 @@ const fetcher = (url, token) => {
 const ViewInvitees = () => {
   const { isLoading } = useAuthenticatedClient("/rsvp", "admin");
   const { token } = useAuthentication();
-  const { data, error } = useSWR(token && ["/api/invitees", token], fetcher);
-  // const { invitees, totalConfirmedAttendees } = data?.data;
+  const { data } = useSWR(token && ["/api/invitees", token], fetcher);
+
+  const openModal = () => {
+    // send api request
+  };
 
   return isLoading ? (
     <LoadingSpinner />
@@ -44,13 +47,12 @@ const ViewInvitees = () => {
               return (
                 <tr className={styles.tableRow} key={invitee._id}>
                   <td>
-                    <a
-                      className="familyAlias"
-                      data-id="<%= invitee._id %>"
-                      href="#"
+                    <span
+                      className="cursor-pointer text-primary"
+                      onClick={handleClick}
                     >
                       {invitee.alias}
-                    </a>
+                    </span>
                     {invitee.email && <span> ✅</span>}
                     {invitee.rsvp && <span> 💒</span>}
                     <p className="mt-1 mb-0">Invited Guests:</p>
