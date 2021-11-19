@@ -8,6 +8,8 @@ import LoadingSpinner from "components/LoadingSpinner";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
 import { useAuthentication } from "contexts/AuthenticationContext";
 import InviteeView from "components/InviteeView";
+import EditInviteeForm from "components/EditInviteeForm";
+import useToggle from "hooks/useToggle";
 import styles from "styles/ViewInvitees.module.css";
 
 const fetcher = (url, token) => {
@@ -27,11 +29,14 @@ const ViewInvitees = () => {
   const { token } = useAuthentication();
   const { data } = useSWR(token && ["/api/invitees", token], fetcher);
   const [invitee, setInvitee] = useState("");
+  const [show, toggleShow] = useToggle(false);
 
   const openModal = (invitee) => {
     // save information in state
-    // form input should be controlled by state
+    setInvitee(invitee);
+
     // set open = true and open modal
+    toggleShow();
   };
 
   return isLoading ? (
@@ -62,6 +67,7 @@ const ViewInvitees = () => {
           </table>
         </Container>
       </div>
+      <EditInviteeForm {...invitee} show={show} toggleShow={toggleShow} />
     </PageLayout>
   );
 };

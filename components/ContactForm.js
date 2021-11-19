@@ -98,7 +98,6 @@ const ContactForm = ({ show, toggleModal }) => {
             onExpire={handleExpire}
             ref={captchaRef}
           />
-          <input type="hidden" name="originPath" id="originPath" />
           <div className="d-flex justify-content-end contact-footer">
             <Button className="me-2" variant="secondary" onClick={toggleModal}>
               Close
