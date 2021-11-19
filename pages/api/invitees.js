@@ -31,6 +31,28 @@ handler.post(async (req, res) => {
   }
 });
 
+handler.patch(async (req, res) => {
+  try {
+    const { attendanceForm, aliasForm, emailForm, identifier } = req.body;
+
+    const invitee = await Code.findOne({ identifier });
+    invitee.attendance = attendanceForm;
+    invitee.alias = aliasForm;
+    invitee.email = emailForm;
+
+    await invitee.save();
+
+    res.status(201).json({
+      status: "success",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "failure",
+      message: error.message,
+    });
+  }
+});
+
 handler.get(async (req, res) => {
   try {
     const invitees = await Code.find();

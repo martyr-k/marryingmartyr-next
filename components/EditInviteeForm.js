@@ -1,6 +1,8 @@
 import { Modal, Button } from "react-bootstrap";
-import { useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
+import { useAuthentication } from "contexts/AuthenticationContext";
 import useInput from "hooks/useInput";
 import styles from "./styles/EditInviteeForm.module.css";
 
@@ -12,6 +14,8 @@ const EditInviteeForm = ({
   show,
   toggleShow,
 }) => {
+  const { token } = useAuthentication();
+
   const {
     value: attendanceForm,
     handleChange: handleAttendance,
@@ -28,20 +32,33 @@ const EditInviteeForm = ({
     setValue: setEmail,
   } = useInput(email);
 
-  useEffect(() => {
-    setAttendance(attendance);
-  }, [attendance, setAttendance]);
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
 
-  useEffect(() => {
-    setAlias(alias);
-  }, [alias, setAlias]);
+      await axios.patch(
+        "/api/invitees",
+        {
+          aliasForm,
+          attendanceForm,
+          emailForm,
+          identifier,
+        },
+        {
+          headers: {
+            authorization: token.value,
+          },
+        }
+      );
 
-  useEffect(() => {
-    setEmail(email);
-  }, [email, setEmail]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+      toast.success("Invitee updated successfully!");
+      toggleShow();
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      }
+      console.log(error);
+    }
   };
 
   return (

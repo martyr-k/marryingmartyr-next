@@ -67,7 +67,9 @@ const ViewInvitees = () => {
           </table>
         </Container>
       </div>
-      <EditInviteeForm {...invitee} show={show} toggleShow={toggleShow} />
+      {show && (
+        <EditInviteeForm {...invitee} show={show} toggleShow={toggleShow} />
+      )}
     </PageLayout>
   );
 };
