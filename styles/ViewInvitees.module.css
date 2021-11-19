@@ -2,17 +2,6 @@
   min-height: 90vh;
   font-family: "Playfair Display", serif;
 }
-
 .table {
   width: 100%;
-}
-.tableRow {
-  border-top: 1px solid rgba(166, 166, 166, 0.4);
-  border-bottom: 1px solid rgba(166, 166, 166, 0.4);
-}
-.tableRow > td {
-  padding: 1rem 0;
-}
-.tableRow > td:first-of-type {
-  width: 50%;
 }

@@ -1,12 +1,14 @@
 import useSWR from "swr";
 import axios from "axios";
 import { Container } from "react-bootstrap";
+import { useState } from "react";
 
 import PageLayout from "components/PageLayout";
 import LoadingSpinner from "components/LoadingSpinner";
 import useAuthenticatedClient from "hooks/useAuthenticatedClient";
-import styles from "styles/ViewInvitees.module.css";
 import { useAuthentication } from "contexts/AuthenticationContext";
+import InviteeView from "components/InviteeView";
+import styles from "styles/ViewInvitees.module.css";
 
 const fetcher = (url, token) => {
   return axios
@@ -24,9 +26,12 @@ const ViewInvitees = () => {
   const { isLoading } = useAuthenticatedClient("/rsvp", "admin");
   const { token } = useAuthentication();
   const { data } = useSWR(token && ["/api/invitees", token], fetcher);
+  const [invitee, setInvitee] = useState("");
 
-  const openModal = () => {
-    // send api request
+  const openModal = (invitee) => {
+    // save information in state
+    // form input should be controlled by state
+    // set open = true and open modal
   };
 
   return isLoading ? (
@@ -43,45 +48,17 @@ const ViewInvitees = () => {
           </div>
 
           <table className={styles.table}>
-            {data?.data?.invitees.map((invitee) => {
-              return (
-                <tr className={styles.tableRow} key={invitee._id}>
-                  <td>
-                    <span
-                      className="cursor-pointer text-primary"
-                      onClick={handleClick}
-                    >
-                      {invitee.alias}
-                    </span>
-                    {invitee.email && <span> ✅</span>}
-                    {invitee.rsvp && <span> 💒</span>}
-                    <p className="mt-1 mb-0">Invited Guests:</p>
-                    {invitee.invitedGuests.map((guest, index) => {
-                      return (
-                        <p className="mb-0" key={index}>
-                          {guest}
-                        </p>
-                      );
-                    })}
-                  </td>
-                  <td className="text-end">
-                    {invitee.attendance}
-                    {invitee.attendance === "in-person" && (
-                      <>
-                        <p className="mt-1 mb-0">Confirmed Guests:</p>
-                        {invitee.confirmedGuests.map((guest, index) => {
-                          return (
-                            <p className="mb-0" key={index}>
-                              {guest}
-                            </p>
-                          );
-                        })}
-                      </>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+            <tbody>
+              {data?.data?.invitees.map((invitee) => {
+                return (
+                  <InviteeView
+                    {...invitee}
+                    key={invitee._id}
+                    openModal={openModal}
+                  />
+                );
+              })}
+            </tbody>
           </table>
         </Container>
       </div>
