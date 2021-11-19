@@ -16,21 +16,10 @@ const EditInviteeForm = ({
 }) => {
   const { token } = useAuthentication();
 
-  const {
-    value: attendanceForm,
-    handleChange: handleAttendance,
-    setValue: setAttendance,
-  } = useInput(attendance);
-  const {
-    value: aliasForm,
-    handleChange: handleAlias,
-    setValue: setAlias,
-  } = useInput(alias);
-  const {
-    value: emailForm,
-    handleChange: handleEmail,
-    setValue: setEmail,
-  } = useInput(email);
+  const { value: attendanceForm, handleChange: handleAttendance } =
+    useInput(attendance);
+  const { value: aliasForm, handleChange: handleAlias } = useInput(alias);
+  const { value: emailForm, handleChange: handleEmail } = useInput(email);
 
   const handleSubmit = async (event) => {
     try {
