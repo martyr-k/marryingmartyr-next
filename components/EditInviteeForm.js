@@ -13,9 +13,9 @@ const EditInviteeForm = ({
   attendance,
   show,
   toggleShow,
+  mutateInvitees,
 }) => {
   const { token } = useAuthentication();
-
   const [attendanceForm, handleAttendance, setAttendance] = useInput("");
   const [aliasForm, handleAlias, setAlias] = useInput("");
   const [emailForm, handleEmail, setEmail] = useInput("");
@@ -46,6 +46,27 @@ const EditInviteeForm = ({
       );
 
       toast.success("Invitee updated successfully!");
+      mutateInvitees((data) => {
+        const invitees = data.data.invitees.map((invitee) => {
+          if (invitee.identifier === identifier) {
+            return {
+              ...invitee,
+              alias: aliasForm,
+              attendance: attendanceForm,
+              email: emailForm,
+            };
+          }
+          return invitee;
+        });
+
+        return {
+          ...data,
+          data: {
+            invitees,
+            totalConfirmedAttendees: data.data.totalConfirmedAttendees,
+          },
+        };
+      }, false);
       toggleShow();
     } catch (error) {
       if (error.response) {

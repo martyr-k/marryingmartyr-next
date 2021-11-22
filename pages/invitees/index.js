@@ -27,7 +27,7 @@ const fetcher = (url, token) => {
 const ViewInvitees = () => {
   const { isLoading } = useAuthenticatedClient("/rsvp", "admin");
   const { token } = useAuthentication();
-  const { data } = useSWR(token && ["/api/invitees", token], fetcher);
+  const { data, mutate } = useSWR(token && ["/api/invitees", token], fetcher);
   const [invitee, setInvitee] = useState("");
   const [show, toggleShow] = useToggle(false);
 
@@ -64,7 +64,12 @@ const ViewInvitees = () => {
           </table>
         </Container>
       </div>
-      <EditInviteeForm {...invitee} show={show} toggleShow={toggleShow} />
+      <EditInviteeForm
+        {...invitee}
+        show={show}
+        toggleShow={toggleShow}
+        mutateInvitees={mutate}
+      />
     </PageLayout>
   );
 };
