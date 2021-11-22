@@ -15,21 +15,9 @@ const RegisterInvitees = () => {
   const { isLoading } = useAuthenticatedClient("/rsvp", "admin");
   const { token } = useAuthentication();
   const [inputState, setInputState] = useState([""]);
-  const {
-    value: attendance,
-    handleChange: setAttendance,
-    reset: resetAttendance,
-  } = useInput("in-person");
-  const {
-    value: inviteCode,
-    handleChange: setInviteCode,
-    reset: resetInviteCode,
-  } = useInput("");
-  const {
-    value: alias,
-    handleChange: setAlias,
-    reset: resetAlias,
-  } = useInput("");
+  const [attendance, handleAttendance, resetAttendance] = useInput("in-person");
+  const [inviteCode, handleInviteCode, resetInviteCode] = useInput("");
+  const [alias, handleAlias, resetAlias] = useInput("");
 
   const incrementGuest = (position) => {
     if (!position) {
@@ -101,7 +89,7 @@ const RegisterInvitees = () => {
                 className="form-control"
                 type="text"
                 value={inviteCode}
-                onChange={setInviteCode}
+                onChange={handleInviteCode}
                 id="inviteCode"
                 autoComplete="off"
               />
@@ -114,7 +102,7 @@ const RegisterInvitees = () => {
                 className="form-control"
                 type="text"
                 value={alias}
-                onChange={setAlias}
+                onChange={handleAlias}
                 id="alias"
                 autoComplete="off"
               />
@@ -128,7 +116,7 @@ const RegisterInvitees = () => {
                 id="attendance"
                 className="form-select"
                 value={attendance}
-                onChange={setAttendance}
+                onChange={handleAttendance}
               >
                 <option value="in-person">In-Person</option>
                 <option value="virtual">Virtual</option>

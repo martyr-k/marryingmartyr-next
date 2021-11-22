@@ -7,17 +7,9 @@ import useInput from "hooks/useInput";
 import styles from "./styles/ContactForm.module.css";
 
 const ContactForm = ({ show, toggleModal }) => {
-  const { value: name, handleChange: setName, reset: resetName } = useInput("");
-  const {
-    value: email,
-    handleChange: setEmail,
-    reset: resetEmail,
-  } = useInput("");
-  const {
-    value: message,
-    handleChange: setMessage,
-    reset: resetMessage,
-  } = useInput("");
+  const [name, handleName, setName, resetName] = useInput("");
+  const { email, handleEmail, setEmail, resetEmail } = useInput("");
+  const { message, handleMessage, setMessage, resetMessage } = useInput("");
   const captchaRef = useRef(null);
 
   const handleSubmit = (event) => {
@@ -64,7 +56,7 @@ const ContactForm = ({ show, toggleModal }) => {
             <input
               className="form-control"
               type="text"
-              onChange={setName}
+              onChange={handleName}
               required
               value={name}
               placeholder="Name"
@@ -74,7 +66,7 @@ const ContactForm = ({ show, toggleModal }) => {
             <input
               className="form-control"
               type="email"
-              onChange={setEmail}
+              onChange={handleEmail}
               value={email}
               required
               placeholder="Email"
@@ -83,7 +75,7 @@ const ContactForm = ({ show, toggleModal }) => {
           <div className="mb-3">
             <textarea
               className="form-control"
-              onChange={setMessage}
+              onChange={handleMessage}
               value={message}
               rows="5"
               required

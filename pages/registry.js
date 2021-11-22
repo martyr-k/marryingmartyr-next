@@ -24,7 +24,7 @@ const stripePromise = loadStripe(
 const Registry = () => {
   const { token } = useAuthentication();
   const { isLoading } = useAuthenticatedClient("/rsvp");
-  const { value: amount, handleChange } = useInput("");
+  const [amount, handleChange] = useInput("");
   const [successModal, setSuccessModal] = useState(false);
   const [show, toggleModal] = useToggle(false);
 

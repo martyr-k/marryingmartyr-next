@@ -16,16 +16,12 @@ import styles from "styles/RSVP.module.css";
 const EditRSVP = () => {
   const { code, isLoading } = useAuthenticatedClient("/rsvp");
   const { token } = useAuthentication();
-  const {
-    value: song,
-    handleChange: handleSongChange,
-    setValue: setSongValue,
-  } = useInput(code?.song?.split("- ")[1] || "");
-  const {
-    value: artist,
-    handleChange: handleArtistChange,
-    setValue: setArtistValue,
-  } = useInput(code?.song?.split(" -")[0] || "");
+  const [song, handleSongChange, setSongValue] = useInput(
+    code?.song?.split("- ")[1] || ""
+  );
+  const [artist, handleArtistChange, setArtistValue] = useInput(
+    code?.song?.split(" -")[0] || ""
+  );
   const [checkedState, setCheckedState] = useState(
     new Array(code?.invitedGuests.length).fill(false)
   );

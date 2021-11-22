@@ -16,21 +16,9 @@ const EditInviteeForm = ({
 }) => {
   const { token } = useAuthentication();
 
-  const {
-    value: attendanceForm,
-    handleChange: handleAttendance,
-    setValue: setAttendance,
-  } = useInput("");
-  const {
-    value: aliasForm,
-    handleChange: handleAlias,
-    setValue: setAlias,
-  } = useInput("");
-  const {
-    value: emailForm,
-    handleChange: handleEmail,
-    setValue: setEmail,
-  } = useInput("");
+  const [attendanceForm, handleAttendance, setAttendance] = useInput("");
+  const [aliasForm, handleAlias, setAlias] = useInput("");
+  const [emailForm, handleEmail, setEmail] = useInput("");
 
   const initializeModal = () => {
     setAlias(alias);

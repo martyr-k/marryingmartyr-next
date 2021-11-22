@@ -16,8 +16,8 @@ import styles from "styles/RSVP.module.css";
 const RSVP = () => {
   const { code, isLoading } = useAuthenticatedClient("/rsvp");
   const { token } = useAuthentication();
-  const { value: song, handleChange: handleSongChange } = useInput("");
-  const { value: artist, handleChange: handleArtistChange } = useInput("");
+  const [song, handleSongChange] = useInput("");
+  const [artist, handleArtistChange] = useInput("");
   const [checkedState, setCheckedState] = useState(
     new Array(code?.invitedGuests.length).fill(false)
   );
