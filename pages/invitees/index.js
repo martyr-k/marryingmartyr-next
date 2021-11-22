@@ -31,11 +31,8 @@ const ViewInvitees = () => {
   const [invitee, setInvitee] = useState("");
   const [show, toggleShow] = useToggle(false);
 
-  const openModal = (invitee) => {
-    // save information in state
-    setInvitee(invitee);
-
-    // set open = true and open modal
+  const openModal = (inviteeObj) => {
+    setInvitee(inviteeObj);
     toggleShow();
   };
 
@@ -67,9 +64,7 @@ const ViewInvitees = () => {
           </table>
         </Container>
       </div>
-      {show && (
-        <EditInviteeForm {...invitee} show={show} toggleShow={toggleShow} />
-      )}
+      <EditInviteeForm {...invitee} show={show} toggleShow={toggleShow} />
     </PageLayout>
   );
 };

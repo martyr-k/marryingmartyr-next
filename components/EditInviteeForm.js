@@ -16,10 +16,27 @@ const EditInviteeForm = ({
 }) => {
   const { token } = useAuthentication();
 
-  const { value: attendanceForm, handleChange: handleAttendance } =
-    useInput(attendance);
-  const { value: aliasForm, handleChange: handleAlias } = useInput(alias);
-  const { value: emailForm, handleChange: handleEmail } = useInput(email);
+  const {
+    value: attendanceForm,
+    handleChange: handleAttendance,
+    setValue: setAttendance,
+  } = useInput("");
+  const {
+    value: aliasForm,
+    handleChange: handleAlias,
+    setValue: setAlias,
+  } = useInput("");
+  const {
+    value: emailForm,
+    handleChange: handleEmail,
+    setValue: setEmail,
+  } = useInput("");
+
+  const initializeModal = () => {
+    setAlias(alias);
+    setAttendance(attendance);
+    setEmail(email);
+  };
 
   const handleSubmit = async (event) => {
     try {
@@ -58,6 +75,7 @@ const EditInviteeForm = ({
       onHide={toggleShow}
       backdrop="static"
       keyboard={false}
+      onEnter={initializeModal}
     >
       <Modal.Header closeButton>
         <Modal.Title>Register Invitees</Modal.Title>
