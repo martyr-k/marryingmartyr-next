@@ -28,6 +28,18 @@ textarea {
   color: white;
   border-color: #590e1e;
 }
+.btn-burgundy:active {
+  background-color: #4b0a18;
+  color: white;
+  border-color: #590e1e;
+}
+.btn-burgundy:focus {
+  background-color: #4b0a18;
+  color: white;
+  border-color: #590e1e;
+  box-shadow: 0 0 0 0.25rem rgba(89, 14, 30, 0.5);
+}
+/* add more pseudo classes for buttons */
 @media (hover: hover) {
   .btn-burgundy:hover {
     background-color: #4b0a18;
@@ -83,4 +95,15 @@ textarea {
 .intro-exit-active {
   opacity: 0;
   transition: opacity 300ms;
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast {
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+  .Toastify__toast-container--top-right {
+    top: 1em;
+  }
 }
