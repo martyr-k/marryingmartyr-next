@@ -96,7 +96,7 @@ const EditRSVP = () => {
     <LoadingSpinner />
   ) : (
     <PageLayout title="Edit RSVP">
-      <div className={styles.main}>
+      <div className={`${styles.main} py-5`}>
         <Image
           src={rsvpImage}
           alt="rsvp image"
@@ -105,7 +105,7 @@ const EditRSVP = () => {
           priority
         />
 
-        <h1 className="display-3 text-center pt-5">
+        <h1 className="display-3 text-center">
           We can&apos;t wait for you to celebrate with us!
         </h1>
 

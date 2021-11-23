@@ -1,7 +1,7 @@
 import axios from "axios";
 import Router from "next/router";
 import Image from "next/image";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useRef, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -66,7 +66,11 @@ const RSVP = () => {
 
         <Form className="mt-5 text-center w-75 mx-auto" onSubmit={handleSubmit}>
           <Form.Group as={Row} className="mb-2" controlId="invite-code">
-            <Form.Label className="text-end" column md={4}>
+            <Form.Label
+              className="text-start text-md-end display-3"
+              column
+              md={4}
+            >
               Invite Code:
             </Form.Label>
             <Col md={4}>
@@ -77,16 +81,17 @@ const RSVP = () => {
               />
             </Col>
           </Form.Group>
-          <Button className="mt-3" variant="secondary" type="submit" size="lg">
+          <Button className="mt-3 btn-burgundy" type="submit" size="lg">
             Submit
           </Button>
         </Form>
 
-        <div className="text-center">
-          <button className="btn btn-light mt-5" onClick={toggleModal}>
-            If you have any questions click here to contact us!
-          </button>
-        </div>
+        <p
+          className={`text-center mt-5 text-white lead ${styles.toggler}`}
+          onClick={toggleModal}
+        >
+          If you have any questions click here to contact us!
+        </p>
         <ContactForm show={show} toggleModal={toggleModal} />
       </div>
     </PageLayout>

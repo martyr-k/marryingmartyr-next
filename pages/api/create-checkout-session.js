@@ -20,9 +20,7 @@ handler.use(dbConnect, secured).post(async (req, res) => {
               name: "Kelub & Victoria's House and Honeymoon Fund",
               description:
                 "Thank you for supporting Kelub & Victoria through their journey. Your contribution is greatly appreciated!",
-              images: [
-                "https://marrying-martyr.herokuapp.com/imgs/house-purchase.jpg",
-              ],
+              images: ["https://marryingmartyr.ca/imgs/house-purchase.jpg"],
             },
             unit_amount: req.body.amount * 100,
           },

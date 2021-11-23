@@ -1,5 +1,5 @@
 .main {
-  height: calc(100vh - 66px);
+  min-height: calc(100vh - 66px);
   position: relative;
   font-family: "Playfair Display SC", serif;
 }
@@ -8,4 +8,11 @@
   opacity: 0.8 !important;
   z-index: -1;
   inset: 0;
+}
+.toggler {
+  font-family: "Playfair Display", serif;
+  cursor: pointer;
+}
+.toggler:hover {
+  text-decoration: underline;
 }
